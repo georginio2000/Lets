@@ -3,11 +3,13 @@ import 'package:flutter/material.dart';
 class RegisterJoinSubmitCreateButton extends StatelessWidget {
   final String labelText;
   final VoidCallback onPressed;
+  final Color color;
 
   const RegisterJoinSubmitCreateButton({
     Key? key,
     required this.labelText,
     required this.onPressed,
+    required this.color,
   }) : super(key: key);
 
   @override
@@ -33,7 +35,8 @@ class RegisterJoinSubmitCreateButton extends StatelessWidget {
       child: ElevatedButton(
         onPressed: onPressed,
         style: ElevatedButton.styleFrom(
-          backgroundColor: const Color(0xFF50B498),
+          backgroundColor: color,
+          //const Color(0xFF50B498),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(2),
           ),

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../widgets/box_for_register_page.dart';
+import '../widgets/register_join_submit_create_button.dart';
 
 class RegistrationPage extends StatelessWidget {
   const RegistrationPage({super.key});
@@ -133,6 +134,24 @@ class RegistrationPage extends StatelessWidget {
                   controller: repeatpasswordController,
                   obscureText: true,
                   keyboardType: TextInputType.text,
+                ),
+
+                const SizedBox(height: 15),
+
+                RegisterJoinSubmitCreateButton(
+                  labelText: "REGISTER",
+                  color: Color(0xFF50B498),
+                  onPressed: () {
+                    print("REGISTER O BRO, WRAIOS");
+                  },
+                ),
+
+                RegisterJoinSubmitCreateButton(
+                  labelText: "BACK",
+                  color: Color(0xFFB47150),
+                  onPressed: () {
+                    print("BACK O BRO, WRAIOS");
+                  },
                 ),
 
                 const SizedBox(height: 15),
