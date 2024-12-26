@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import '../widgets/login_button.dart';
+import '../widgets/forgot_your_password.dart';
 
 class LoginPage extends StatelessWidget {
   const LoginPage({super.key});
@@ -163,98 +165,27 @@ class LoginPage extends StatelessWidget {
                     ),
                   ],
                 ),
+
                 const SizedBox(height: 15),
 
                 // Login Button !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-                Container(
-                  width: 130,
-                  height: 45,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(2),
-                    border: Border.all(
-                      color: Colors.black,
-                      width: 1.0,
-                    ),
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.grey.withOpacity(0.5),
-                        spreadRadius: 2,
-                        blurRadius: 5,
-                        offset: const Offset(0, 3),
-                      ),
-                    ],
-                  ),
-                  child: ElevatedButton(
-                    onPressed: () {
-                      String username = usernameController.text;
-                      String password = passwordController.text;
-
-                      // TODO: Υλοποίηση της λογικής για login verification
-                    },
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: const Color(0xFF50B498),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(2),
-                      ),
-                      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                    ),
-                    child: const Text(
-                      "LOGIN",
-                      style: TextStyle(
-                        fontSize: 14,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.black,
-                      ),
-                    ),
-                  ),
+                LoginButton(
+                  onPressed: () { // edw to onPressed einai h synarthsh parametros poy pernaw sto login button.
+                    print("Username re bro");
+                  },
                 ),
 
                 const SizedBox(height: 6),
-
 
                 // FORFOT YOUR PASSWORD BUTTON !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-
-                Container(
-                  width: 130,
-                  height: 17,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(0),
-                    border: Border.all(
-                      color: Colors.black,
-                      width: 1.0,
-                    ),
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.grey.withOpacity(0.5),
-                        spreadRadius: 2,
-                        blurRadius: 5,
-                        offset: const Offset(0, 3),
-                      ),
-                    ],
-                  ),
-                  child: ElevatedButton(
-                    onPressed: () {
-                      //tipota
-                    },
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: const Color(0xFFE5E1DA),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(0),
-                      ),
-                      //padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                    ),
-                    child: const Text(
-                      "FORGOT YOUR PASSWORD?",
-                      style: TextStyle(
-                        fontSize: 6,
-                        //fontWeight: FontWeight.bold,
-                        color: Colors.black,
-                      ),
-                    ),
-                  ),
+                ForgotYourPasswordButton(
+                  onPressed: (){
+                    print("Forgot your password re bro");
+                  },
                 ),
 
                 const SizedBox(height: 6),
+
                 // DONT HAVE AN ACCOUNT? SIGN UP TEXT-BUTTON !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
