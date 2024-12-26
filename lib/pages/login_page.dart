@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:project/pages/settings_page.dart';
 import '../widgets/login_button.dart';
 import '../widgets/forgot_your_password.dart';
 import '../pages/registration_page.dart';
@@ -126,6 +127,13 @@ class LoginPage extends StatelessWidget {
                   text: "SIGN IN WITH MICROSOFT",
                   onPressed: () {
                     print("SIGN IN WITH MICROSOFT RE BRO");
+                    // EXW VALEI EDW KAI KALA NA PATAS TO BUTTON GIA NA PAS SETTINGS GIA NA TO TSEKAROYME
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const SettingsPage(),
+                      ),
+                    );
                   },
                 ),
 
