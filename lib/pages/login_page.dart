@@ -24,7 +24,7 @@ class LoginPage extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 const SizedBox(
-                  height: 100, // Ύψος του Stack
+                  height: 100,
                   child: Stack(
                     clipBehavior: Clip.none,
                     children: [
@@ -92,7 +92,7 @@ class LoginPage extends StatelessWidget {
                 // Login Button !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
                 LoginButton(
                   onPressed: () { // edw to onPressed einai h synarthsh parametros poy pernaw sto login button.
-                    print("Username re bro");
+                    print("ekanes login re bro");
                   },
                 ),
 
