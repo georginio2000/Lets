@@ -163,7 +163,7 @@ class RegistrationPage extends StatelessWidget {
                         print("BACK O BRO, WRAIOS");
                       },
                     ),
-                    SizedBox(width: 30), // Χώρος 20 μονάδων από την αριστερή πλευρά
+                    SizedBox(width: 30),
                     RegisterJoinSubmitCreateButton(
                       labelText: "REGISTER",
                       color: Color(0xFF50B498),
