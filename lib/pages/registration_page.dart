@@ -3,6 +3,7 @@ import 'package:project/pages/login_page.dart';
 import '../widgets/box_for_register_page.dart';
 import '../widgets/register_join_submit_create_button.dart';
 import '../widgets/register_age.dart';
+import '../widgets/gender_dropdown.dart';
 
 class RegistrationPage extends StatelessWidget {
   const RegistrationPage({super.key});
@@ -139,17 +140,22 @@ class RegistrationPage extends StatelessWidget {
                 ),
 
                 const SizedBox(height: 15),
-
-                AgeBox(
-                  controller: ageController,
-                  keyboardType: TextInputType.number,
+                Row(
+                    mainAxisAlignment: MainAxisAlignment.center, // Center the buttons horizontally
+                    children:[
+                    AgeBox(
+                      controller: ageController,
+                      keyboardType: TextInputType.number,
+                    ),
+                    SizedBox(width: 20),
+                    GenderDropdownMenu(),
+                  ]
                 ),
-
                 const SizedBox(height: 45),
 
                 Row(
+                  mainAxisAlignment: MainAxisAlignment.center, // Center the buttons horizontally
                   children: [
-                    SizedBox(width: 30),
                     RegisterJoinSubmitCreateButton(
                       labelText: "BACK",
                       color: Color(0xFFB47150),
