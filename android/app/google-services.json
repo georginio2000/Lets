@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "879196126285",
+    "project_id": "lets-6f17c",
+    "storage_bucket": "lets-6f17c.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:879196126285:android:5b790d02764657ac4ff004",
+        "android_client_info": {
+          "package_name": "com.example.levi"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA2e89btxwib_wpMMPiGZ73Y9tFLz5sec0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
