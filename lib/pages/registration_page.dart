@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:project/pages/login_page.dart';
 import '../widgets/box_for_register_page.dart';
 import '../widgets/register_join_submit_create_button.dart';
+import '../widgets/register_age.dart';
 
 class RegistrationPage extends StatelessWidget {
   const RegistrationPage({super.key});
@@ -138,6 +140,11 @@ class RegistrationPage extends StatelessWidget {
 
                 const SizedBox(height: 15),
 
+                AgeBox(
+                  controller: ageController,
+                  keyboardType: TextInputType.number,
+                ),
+
                 RegisterJoinSubmitCreateButton(
                   labelText: "REGISTER",
                   color: Color(0xFF50B498),
@@ -150,6 +157,12 @@ class RegistrationPage extends StatelessWidget {
                   labelText: "BACK",
                   color: Color(0xFFB47150),
                   onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const LoginPage(),
+                      ),
+                    );
                     print("BACK O BRO, WRAIOS");
                   },
                 ),

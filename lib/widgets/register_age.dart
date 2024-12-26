@@ -1,16 +1,12 @@
 import 'package:flutter/material.dart';
 
-class BoxForRegisterPage extends StatelessWidget {
-  final String hintText;
+class AgeBox extends StatelessWidget {
   final TextEditingController controller;
-  final bool obscureText;
   final TextInputType keyboardType;
 
-  const BoxForRegisterPage({
+  const AgeBox({
     super.key,
-    required this.hintText,
     required this.controller,
-    this.obscureText = false,
     this.keyboardType = TextInputType.text,
   });
 
@@ -19,8 +15,8 @@ class BoxForRegisterPage extends StatelessWidget {
     return Stack(
       children: [
         Container(
-          width: 260,
-          height: 40,
+          width: 90,
+          height: 45,
           padding: const EdgeInsets.symmetric(horizontal: 10),
           decoration: BoxDecoration(
             color: const Color(0xFFE5E1DA),
@@ -40,11 +36,10 @@ class BoxForRegisterPage extends StatelessWidget {
           ),
           child: TextField(
             controller: controller,
-            obscureText: obscureText,
             keyboardType: keyboardType,
             decoration: const InputDecoration(
               border: InputBorder.none,
-              contentPadding: EdgeInsets.all(5),
+              contentPadding: EdgeInsets.only(top: 15, left: 5), // Ρυθμίζει το input
             ),
             style: const TextStyle(
               color: Colors.black,
@@ -55,7 +50,7 @@ class BoxForRegisterPage extends StatelessWidget {
           top: 5,
           left: 15,
           child: Text(
-            hintText,
+            "AGE",
             style: const TextStyle(
               fontSize: 11,
               color: Colors.black38,
