@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import '../widgets/login_button.dart';
 import '../widgets/forgot_your_password.dart';
+import '../pages/registration_page.dart';
+import '../widgets/sign_in_with.dart';
 
 class LoginPage extends StatelessWidget {
   const LoginPage({super.key});
@@ -212,7 +214,12 @@ class LoginPage extends StatelessWidget {
                       ),
                       child: TextButton(
                         onPressed: () {
-                          // TODO: Ενέργεια εγγραφής
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => const RegistrationPage(),
+                            ),
+                          );
                         },
                         child: const Text(
                           "SIGN UP",
@@ -226,130 +233,35 @@ class LoginPage extends StatelessWidget {
                     ),
                   ],
                 ),
+
                 const SizedBox(height: 30),
+
                 // MICROSOFT
-                Container(
-                  width: 250,
-                  height: 40,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(0),
-                    border: Border.all(
-                      color: Colors.black,
-                      width: 1.0,
-                    ),
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.grey.withOpacity(0.5),
-                        spreadRadius: 2,
-                        blurRadius: 5,
-                        offset: const Offset(0, 3),
-                      ),
-                    ],
-                  ),
-                  child: ElevatedButton(
-                    onPressed: () {
-                      //tipota
-                    },
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: const Color(0xFFE5E1DA),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(0),
-                      ),
-                      //padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                    ),
-                    child: const Text(
-                      "SIGN IN WITH MICROSOFT",
-                      style: TextStyle(
-                        fontSize: 7,
-                        //fontWeight: FontWeight.bold,
-                        color: Colors.black,
-                      ),
-                    ),
-                  ),
+                SignInWith(
+                  text: "SIGN IN WITH MICROSOFT",
+                  onPressed: () {
+                    print("SIGN IN WITH MICROSOFT RE BRO");
+                  },
                 ),
 
                 const SizedBox(height: 10),
+
                 // SIGN UP WITH FACEBOOK !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-                Container(
-                  width: 250,
-                  height: 40,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(0),
-                    border: Border.all(
-                      color: Colors.black,
-                      width: 1.0,
-                    ),
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.grey.withOpacity(0.5),
-                        spreadRadius: 2,
-                        blurRadius: 5,
-                        offset: const Offset(0, 3),
-                      ),
-                    ],
-                  ),
-                  child: ElevatedButton(
-                    onPressed: () {
-                      //tipota
-                    },
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: const Color(0xFFE5E1DA),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(0),
-                      ),
-                      //padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                    ),
-                    child: const Text(
-                      "SIGN IN WITH FACEBOOK",
-                      style: TextStyle(
-                        fontSize: 7,
-                        //fontWeight: FontWeight.bold,
-                        color: Colors.black,
-                      ),
-                    ),
-                  ),
+                SignInWith(
+                  text: "SIGN IN WITH FACEBOOK",
+                  onPressed: () {
+                    print("SIGN IN WITH FACEBOOK RE BRO");
+                  },
                 ),
 
                 const SizedBox(height: 10),
+
                 //SIGN UP WITH GOOGLE !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-                Container(
-                  width: 250,
-                  height: 40,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(0),
-                    border: Border.all(
-                      color: Colors.black,
-                      width: 1.0,
-                    ),
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.grey.withOpacity(0.5),
-                        spreadRadius: 2,
-                        blurRadius: 5,
-                        offset: const Offset(0, 3),
-                      ),
-                    ],
-                  ),
-                  child: ElevatedButton(
-                    onPressed: () {
-                      //tipota
-                    },
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: const Color(0xFFE5E1DA),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(0),
-                      ),
-                      //padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                    ),
-                    child: const Text(
-                      "SIGN IN WITH GOOGLE",
-                      style: TextStyle(
-                        fontSize: 7,
-                        //fontWeight: FontWeight.bold,
-                        color: Colors.black,
-                      ),
-                    ),
-                  ),
+                SignInWith(
+                  text: "SIGN IN WITH GOOGLE",
+                  onPressed: () {
+                    print("SIGN IN WITH GOOGLE RE BRO");
+                  },
                 ),
               ],
             ),
