@@ -145,30 +145,34 @@ class RegistrationPage extends StatelessWidget {
                   keyboardType: TextInputType.number,
                 ),
 
-                RegisterJoinSubmitCreateButton(
-                  labelText: "REGISTER",
-                  color: Color(0xFF50B498),
-                  onPressed: () {
-                    print("REGISTER O BRO, WRAIOS");
-                  },
+                const SizedBox(height: 45),
+
+                Row(
+                  children: [
+                    SizedBox(width: 30),
+                    RegisterJoinSubmitCreateButton(
+                      labelText: "BACK",
+                      color: Color(0xFFB47150),
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const LoginPage(),
+                          ),
+                        );
+                        print("BACK O BRO, WRAIOS");
+                      },
+                    ),
+                    SizedBox(width: 30), // Χώρος 20 μονάδων από την αριστερή πλευρά
+                    RegisterJoinSubmitCreateButton(
+                      labelText: "REGISTER",
+                      color: Color(0xFF50B498),
+                      onPressed: () {
+                        print("REGISTER O BRO, WRAIOS");
+                      },
+                    ),
+                  ],
                 ),
-
-                RegisterJoinSubmitCreateButton(
-                  labelText: "BACK",
-                  color: Color(0xFFB47150),
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => const LoginPage(),
-                      ),
-                    );
-                    print("BACK O BRO, WRAIOS");
-                  },
-                ),
-
-                const SizedBox(height: 15),
-
               ],
             ),
           ),
