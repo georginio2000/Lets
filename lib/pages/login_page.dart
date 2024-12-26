@@ -4,6 +4,8 @@ import '../widgets/forgot_your_password.dart';
 import '../pages/registration_page.dart';
 import '../widgets/sign_in_with.dart';
 import '../widgets/dont_have_account.dart';
+import '../widgets/login_username_password_box.dart';
+
 class LoginPage extends StatelessWidget {
   const LoginPage({super.key});
 
@@ -71,101 +73,18 @@ class LoginPage extends StatelessWidget {
                 const SizedBox(height: 30),
 
                 // Username Box  !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    const Padding(
-                      padding: EdgeInsets.only(bottom: 1),
-                      child: Text(
-                        "USERNAME",
-                        style: TextStyle(
-                          fontSize: 11,
-                          color: Colors.black,
-                        ),
-                      ),
-                    ),
-                    Container(
-                      width: 220,
-                      height: 50,
-                      padding: const EdgeInsets.symmetric(horizontal: 10),
-                      decoration: BoxDecoration(
-                        color: const Color(0xFFE5E1DA),
-                        borderRadius: BorderRadius.circular(0),
-                        border: Border.all(
-                          color: Colors.black,
-                          width: 1.0,
-                        ),
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.grey.withOpacity(0.5),
-                            spreadRadius: 2,
-                            blurRadius: 5,
-                            offset: const Offset(0, 1),
-                          ),
-                        ],
-                      ),
-                      child: TextField(
-                        controller: usernameController,
-                        decoration: const InputDecoration(
-                          border: InputBorder.none,
-                          contentPadding: EdgeInsets.all(10),
-                        ),
-                        style: const TextStyle(
-                          color: Colors.black,
-                        ),
-                      ),
-                    ),
-                  ],
+                UsernamePasswordBox(
+                  labelText: "USERNAME",
+                  controller: usernameController,
                 ),
+
                 const SizedBox(height: 5),
 
-                // Password Box  !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    const Padding(
-                      padding: EdgeInsets.only(bottom: 1),
-                      child: Text(
-                        "PASSWORD",
-                        style: TextStyle(
-                          fontSize: 11,
-                          color: Colors.black,
-                        ),
-                      ),
-                    ),
-                    Container(
-                      width: 220,
-                      height: 50,
-                      padding: const EdgeInsets.symmetric(horizontal: 10),
-                      decoration: BoxDecoration(
-                        color: const Color(0xFFE5E1DA),
-                        borderRadius: BorderRadius.circular(0),
-                        border: Border.all(
-                          color: Colors.black,
-                          width: 1.0,
-                        ),
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.grey.withOpacity(0.5),
-                            spreadRadius: 2,
-                            blurRadius: 5,
-                            offset: const Offset(0, 1),
-                          ),
-                        ],
-                      ),
-                      child: TextField(
-                        controller: passwordController,
-                        obscureText: true,
-                        decoration: const InputDecoration(
-                          border: InputBorder.none,
-                          contentPadding: EdgeInsets.all(10),
-                        ),
-                        style: const TextStyle(
-                          color: Colors.black,
-                        ),
-                      ),
-                    ),
-                  ],
+                // Password Box!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+                UsernamePasswordBox(
+                  labelText: "PASSWORD",
+                  controller: passwordController,
+                  obscureText: true,
                 ),
 
                 const SizedBox(height: 15),
