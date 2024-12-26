@@ -1,22 +1,19 @@
-import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 
-/// Flutter code sample for [DropdownMenu].
+void main() {
+  runApp(MyApp());
+}
 
-const List<String> list = <String>['MALE', 'FEMALE', 'OTHER'];
-
-void main() => runApp(const DropdownMenuApp());
-
-class DropdownMenuApp extends StatelessWidget {
-  const DropdownMenuApp({super.key});
-
+class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      theme: ThemeData(useMaterial3: true),
+      debugShowCheckedModeBanner: false, // Remove debug banner
       home: Scaffold(
-        appBar: AppBar(title: const Text('DropdownMenu Sample')),
-        body: const Center(
+        appBar: AppBar(
+          title: Text('Gender Dropdown Menu'),
+        ),
+        body: Center(
           child: GenderDropdownMenu(),
         ),
       ),
@@ -25,95 +22,53 @@ class DropdownMenuApp extends StatelessWidget {
 }
 
 class GenderDropdownMenu extends StatefulWidget {
-  const GenderDropdownMenu({super.key});
-
   @override
-  State<GenderDropdownMenu> createState() => _GenderDropdownMenuState();
+  _GenderDropdownMenuState createState() => _GenderDropdownMenuState();
 }
 
-typedef MenuEntry = DropdownMenuEntry<String>;
-
 class _GenderDropdownMenuState extends State<GenderDropdownMenu> {
-  static final List<MenuEntry> menuEntries = UnmodifiableListView<MenuEntry>(
-    list.map<MenuEntry>((String name) => MenuEntry(value: name, label: name)),
-  );
-  String dropdownValue = list.first;
+  String? selectedValue; // Variable to hold the selected value
+  final List<String> items = ['MALE', 'FEMALE', 'OTHER']; // Dropdown items
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      width: 150, // Set the width of the main box
-      height: 45, // Set the height of the main box
-      child: DropdownMenu<String>(
-        // Customize the main box (input field) here:
-        inputDecorationTheme: InputDecorationTheme(
-          filled: true, // Enable filling the background
-          fillColor: const Color(0xFFE5E1DA), // Set the background color
-          border: OutlineInputBorder(
-            // Customize the border
-            borderRadius: BorderRadius.circular(2.0),
-            borderSide: const BorderSide(
-              color: Colors.black, // Border color for the main box
-              width: 1.0, // Border width for the main box
-            ),
-          ),
-          contentPadding: const EdgeInsets.symmetric(
-              horizontal: 16.0, vertical: 12.0), // Adjust padding
-        ),
-        // Customize the dropdown menu (the list of items) here:
-        menuStyle: MenuStyle(
-          backgroundColor: MaterialStateProperty.all<Color>(
-              const Color(0xFFE5E1DA)), // Background color for the dropdown
-          shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-            RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(2.0),
-              side: const BorderSide(
-                color: Colors.black, // Border color for the dropdown
-                width: 1.0, // Border width for the dropdown
+    return Container(
+      width: 150, // Width of the dropdown box
+      height: 45, // Height of the dropdown box
+      padding: const EdgeInsets.symmetric(horizontal: 8),
+      decoration: BoxDecoration(
+        color: const Color(0xFFE5E1DA), // Background color of the box
+        border: Border.all(color: Colors.black, width: 1), // Border around the main box
+        borderRadius: BorderRadius.circular(2), // Rounded corners for a modern look
+      ),
+      child: DropdownButtonHideUnderline(
+        child: DropdownButton<String>(
+          value: selectedValue,
+          hint: const Text(
+            'GENDER',
+            style: TextStyle(fontSize: 14, color: Colors.black38), // Placeholder text style
+          ), // Placeholder text
+          items: items.map((String item) {
+            return DropdownMenuItem<String>(
+              value: item,
+              child: Text(
+                item,
+                style: const TextStyle(fontSize: 14, color: Colors.black), // Dropdown item text style
               ),
-            ),
+            );
+          }).toList(),
+          onChanged: (String? newValue) {
+            setState(() {
+              selectedValue = newValue; // Update the selected value
+            });
+          },
+          icon: const Icon(
+            Icons.arrow_drop_down,
+            color: Colors.black, // Dropdown arrow icon color
           ),
-          elevation: MaterialStateProperty.all<double>(8.0),
-          padding: MaterialStateProperty.all<EdgeInsets>(
-              const EdgeInsets.all(0.0)), // Remove padding
-          surfaceTintColor: MaterialStateProperty.all<Color>(Colors.white),
-          fixedSize: MaterialStateProperty.all<Size>(
-              const Size(150, 144)), // Set the size of the dropdown menu
+          dropdownColor: const Color(0xFFE5E1DA), // Background color of the dropdown menu
+          style: const TextStyle(color: Colors.black, fontSize: 14), // Style for dropdown text
         ),
-        initialSelection: list.first,
-        onSelected: (String? value) {
-          // This is called when the user selects an item.
-          setState(() {
-            dropdownValue = value!;
-          });
-        },
-        dropdownMenuEntries: menuEntries
-            .map(
-              (entry) => DropdownMenuEntry<String>(
-            value: entry.value,
-            label: entry.label,
-            style: ButtonStyle(
-              padding: MaterialStateProperty.all<EdgeInsets>(
-                  const EdgeInsets.symmetric(
-                      horizontal: 16.0,
-                      vertical: 12.0)), // Add padding to each item
-              backgroundColor: MaterialStateProperty.all<Color>(
-                  const Color(0xFFE5E1DA)), // Background color for each item
-              shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(0.0),
-                  side: const BorderSide(
-                    color: Colors.black, // Border color for each item
-                    width: 1.0, // Border width for each item
-                  ),
-                ),
-              ),
-              fixedSize: MaterialStateProperty.all<Size>(
-                  const Size(150, 45)), // Set the size of each item
-            ),
-          ),
-        )
-            .toList(),
       ),
     );
   }
