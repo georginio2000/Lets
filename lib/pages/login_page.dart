@@ -18,14 +18,14 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-  final TextEditingController usernameController = TextEditingController();
+  final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
   final FirebaseAuth _auth = FirebaseAuth.instance;
 
   Future<void> signIn() async {
     try {
       await _auth.signInWithEmailAndPassword(
-        email: usernameController.text.trim(),
+        email: emailController.text.trim(),
         password: passwordController.text.trim(),
       );
       ScaffoldMessenger.of(context).showSnackBar(
@@ -64,7 +64,7 @@ class _LoginPageState extends State<LoginPage> {
                 // Username Box
                 UsernamePasswordBox(
                   labelText: "USERNAME",
-                  controller: usernameController,
+                  controller: emailController,
                 ),
 
                 const SizedBox(height: 5),
@@ -152,7 +152,7 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   void dispose() {
-    usernameController.dispose();
+    emailController.dispose();
     passwordController.dispose();
     super.dispose();
   }
