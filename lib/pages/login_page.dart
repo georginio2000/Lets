@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:project/pages/settings_page.dart';
-import 'package:project/pages/home_page.dart';
+import 'package:project/pages/main_screen.dart';
 import '../widgets/login/login_button.dart';
 import '../widgets/login/forgot_your_password.dart';
 import '../pages/registration_page.dart';
@@ -10,7 +10,7 @@ import '../widgets/login/dont_have_account.dart';
 import '../widgets/login/login_username_password_box.dart';
 import '../widgets/all_Lets/lets_start.dart';
 
-class LoginPage extends StatelessWidget {
+class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
 
   @override
@@ -30,6 +30,12 @@ class _LoginPageState extends State<LoginPage> {
       );
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(content: Text('Login successful!')),
+      );
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => MainScreen(),
+        ),
       );
       // Μετάβαση σε άλλη σελίδα
       //Navigator.pushReplacementNamed(context, '/home');
