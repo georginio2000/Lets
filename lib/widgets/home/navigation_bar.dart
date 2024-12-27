@@ -1,71 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-void main() {
-  runApp(MyApp());
-}
-
-class MyApp extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: HomePage(),
-    );
-  }
-}
-
-class HomePage extends StatefulWidget {
-  @override
-  _HomePageState createState() => _HomePageState();
-}
-
-class _HomePageState extends State<HomePage> {
-  int _selectedIndex = 0; // To track the selected icon/page
-
-  final List<Widget> _pages = [
-    Center(child: Text('Home Page', style: TextStyle(fontSize: 24))),
-    Center(child: Text('Friends Page', style: TextStyle(fontSize: 24))),
-    Center(child: Text('Add Page', style: TextStyle(fontSize: 24))),
-    Center(child: Text('Map Page', style: TextStyle(fontSize: 24))),
-    Center(child: Text('Profile Page', style: TextStyle(fontSize: 24))),
-  ];
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Navigation Bar Example'),
-      ),
-      body: _pages[_selectedIndex], // Display the selected page
-      bottomNavigationBar: NavigationBar(
-        selectedIndex: _selectedIndex,
-        onIconTapped: (index) {
-          setState(() {
-            _selectedIndex = index; // Update the selected index
-          });
-        },
-      ),
-    );
-  }
-}
-
-class NavigationBar extends StatelessWidget {
+class CustomNavigationBar extends StatelessWidget { // Rename to CustomNavigationBar
   final int selectedIndex; // Current selected index
   final Function(int) onIconTapped; // Callback for icon taps
 
-  NavigationBar({required this.selectedIndex, required this.onIconTapped});
+  CustomNavigationBar({required this.selectedIndex, required this.onIconTapped});
 
   @override
   Widget build(BuildContext context) {
     return Container(
       height: 60, // Set the height of the navigation bar
-      decoration: BoxDecoration(
+      decoration: const BoxDecoration(
         color: Color(0xFF468585), // Background color
         border: Border(
           top: BorderSide(width: 1.0, color: Colors.black), // Optional border
         ),
-      ), // Fixed missing closing parenthesis for BoxDecoration
+      ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly, // Evenly distribute items
         children: <Widget>[
@@ -76,7 +27,7 @@ class NavigationBar extends StatelessWidget {
               colorFilter: ColorFilter.mode(
                 selectedIndex == 0 ? Colors.white : Colors.black,
                 BlendMode.srcIn,
-              ), // Use ColorFilter for SVG color
+              ),
             ),
             onPressed: () {
               onIconTapped(0); // Pass the index to the callback
@@ -86,56 +37,56 @@ class NavigationBar extends StatelessWidget {
           IconButton(
             icon: SvgPicture.asset(
               'assets/FREINDS_ICON.svg', // Path to your SVG file
-              height: 30,             // Set the height
+              height: 30,
               colorFilter: ColorFilter.mode(
                 selectedIndex == 1 ? Colors.white : Colors.black,
                 BlendMode.srcIn,
-              ), // Use ColorFilter for SVG color
+              ),
             ),
             onPressed: () {
-              onIconTapped(1); // Pass the index to the callback
+              onIconTapped(1);
             },
             tooltip: 'Friends',
           ),
           IconButton(
             icon: SvgPicture.asset(
-              'assets/ADD_ICON.svg', // Path to your SVG file
-              height: 30,             // Set the height
+              'assets/ADD_ICON.svg',
+              height: 30,
               colorFilter: ColorFilter.mode(
                 selectedIndex == 2 ? Colors.white : Colors.black,
                 BlendMode.srcIn,
-              ), // Use ColorFilter for SVG color
+              ),
             ),
             onPressed: () {
-              onIconTapped(2); // Pass the index to the callback
+              onIconTapped(2);
             },
             tooltip: 'Add',
           ),
           IconButton(
             icon: SvgPicture.asset(
-              'assets/MAP_ICON_APPBAR.svg', // Path to your SVG file
-              height: 30,             // Set the height
+              'assets/MAP_ICON_APPBAR.svg',
+              height: 30,
               colorFilter: ColorFilter.mode(
                 selectedIndex == 3 ? Colors.white : Colors.black,
                 BlendMode.srcIn,
-              ), // Use ColorFilter for SVG color
+              ),
             ),
             onPressed: () {
-              onIconTapped(3); // Pass the index to the callback
+              onIconTapped(3);
             },
             tooltip: 'Map',
           ),
           IconButton(
             icon: SvgPicture.asset(
-              'assets/PROFILE_ICON.svg', // Path to your SVG file
-              height: 30,             // Set the height
+              'assets/PROFILE_ICON.svg',
+              height: 30,
               colorFilter: ColorFilter.mode(
                 selectedIndex == 4 ? Colors.white : Colors.black,
                 BlendMode.srcIn,
-              ), // Use ColorFilter for SVG color
+              ),
             ),
             onPressed: () {
-              onIconTapped(4); // Pass the index to the callback
+              onIconTapped(4);
             },
             tooltip: 'Profile',
           ),
