@@ -24,7 +24,9 @@ class MyApp extends StatelessWidget {
 }
 
 class GenderDropdownMenu extends StatefulWidget {
-  const GenderDropdownMenu({super.key});
+  final ValueChanged<String?>? onChanged; // Callback for changes
+
+  const GenderDropdownMenu({super.key, this.onChanged});
 
   @override
   _GenderDropdownMenuState createState() => _GenderDropdownMenuState();
@@ -65,6 +67,9 @@ class _GenderDropdownMenuState extends State<GenderDropdownMenu> {
             setState(() {
               selectedValue = newValue; // Update the selected value
             });
+            if (widget.onChanged != null) {
+              widget.onChanged!(newValue); // Trigger the callback
+            }
           },
           icon: const Icon(
             Icons.arrow_drop_down,
