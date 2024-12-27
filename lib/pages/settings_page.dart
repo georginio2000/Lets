@@ -7,6 +7,7 @@ import '../widgets/settings/user_info_dialog.dart'; // Import της συνάρ�
 import '../widgets/settings/about_lets_dialog.dart';
 import 'login_page.dart';
 import '../widgets/settings/faq.dart';
+import '../widgets/settings/feedback_support_dialog.dart';
 class SettingsPage extends StatelessWidget {
   const SettingsPage({super.key});
 
@@ -89,7 +90,9 @@ class SettingsPage extends StatelessWidget {
                   const SizedBox(height: 30),
                   SettingsBox(
                     labelText: "FEEDBACK AND SUPPORT",
-                    onPressed: () {},
+                    onPressed: () {
+                      FeedbackSupportDialog.show(context);
+                    },
                   ),
                   const SizedBox(height: 30),
                   SettingsBox(

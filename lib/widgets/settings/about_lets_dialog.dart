@@ -11,7 +11,7 @@ class AboutLetsDialog {
           child: Center(
             child: Container(
               width: 367,
-              height: 255,
+              //height: 15,
               padding: const EdgeInsets.all(20.0),
               decoration: BoxDecoration(
                 color: const Color(0xFF9CC4C4),
@@ -40,6 +40,7 @@ class AboutLetsDialog {
                           color: Colors.black,
                         ),
                       ),
+
                       IconButton(
                         icon: const Icon(Icons.close, color: Colors.black),
                         onPressed: () {
