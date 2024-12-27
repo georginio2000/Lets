@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:project/pages/login_page.dart';
-import '../widgets/box_for_register_page.dart';
-import '../widgets/register_join_submit_create_button.dart';
-import '../widgets/register_age.dart';
-import '../widgets/gender_dropdown.dart';
-import '../widgets/lets_register.dart';
+import '../widgets/register/box_for_register_page.dart';
+import '../widgets/register/register_join_submit_create_button.dart';
+import '../widgets/register/register_age.dart';
+import '../widgets/register/gender_dropdown.dart';
+import '../widgets/all_Lets/lets_register.dart';
+
 class RegistrationPage extends StatelessWidget {
   const RegistrationPage({super.key});
 

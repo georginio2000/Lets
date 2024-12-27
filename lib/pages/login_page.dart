@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:project/pages/settings_page.dart';
-import '../widgets/login_button.dart';
-import '../widgets/forgot_your_password.dart';
+import '../widgets/login/login_button.dart';
+import '../widgets/login/forgot_your_password.dart';
 import '../pages/registration_page.dart';
-import '../widgets/sign_in_with.dart';
-import '../widgets/dont_have_account.dart';
-import '../widgets/login_username_password_box.dart';
-import '../widgets/lets_start.dart';
+import '../widgets/login/sign_in_with.dart';
+import '../widgets/login/dont_have_account.dart';
+import '../widgets/login/login_username_password_box.dart';
+import '../widgets/all_Lets/lets_start.dart';
 class LoginPage extends StatelessWidget {
   const LoginPage({super.key});
 
