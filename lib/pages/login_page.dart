@@ -6,7 +6,7 @@ import '../pages/registration_page.dart';
 import '../widgets/sign_in_with.dart';
 import '../widgets/dont_have_account.dart';
 import '../widgets/login_username_password_box.dart';
-
+import '../widgets/lets_start.dart';
 class LoginPage extends StatelessWidget {
   const LoginPage({super.key});
 
@@ -24,52 +24,7 @@ class LoginPage extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                const SizedBox(
-                  height: 100,
-                  child: Stack(
-                    clipBehavior: Clip.none,
-                    children: [
-                      Positioned(
-                        top: -10,
-                        left: 110,
-                        child: Text(
-                          "LET'S",
-                          style: TextStyle(
-                            fontSize: 55,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.black,
-                            shadows: [
-                              Shadow(
-                                blurRadius: 3,
-                                color: Colors.grey,
-                                offset: Offset(1, 4),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                      Positioned(
-                        top: 50,
-                        left: 110,
-                        child: Text(
-                          "START",
-                          style: TextStyle(
-                            fontSize: 20,
-                            fontWeight: FontWeight.w500,
-                            color: Colors.black,
-                            shadows: [
-                              Shadow(
-                                blurRadius: 3,
-                                color: Colors.grey,
-                                offset: Offset(1, 5),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
+                const LetsStartWidget(),
 
                 const SizedBox(height: 30),
 

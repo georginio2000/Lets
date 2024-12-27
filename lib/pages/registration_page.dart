@@ -4,7 +4,7 @@ import '../widgets/box_for_register_page.dart';
 import '../widgets/register_join_submit_create_button.dart';
 import '../widgets/register_age.dart';
 import '../widgets/gender_dropdown.dart';
-
+import '../widgets/lets_register.dart';
 class RegistrationPage extends StatelessWidget {
   const RegistrationPage({super.key});
 
@@ -29,52 +29,7 @@ class RegistrationPage extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                const SizedBox(
-                  height: 100,
-                  child: Stack(
-                    clipBehavior: Clip.none,
-                    children: [
-                      Positioned(
-                        top: -10,
-                        left: 110,
-                        child: Text(
-                          "LET'S",
-                          style: TextStyle(
-                            fontSize: 55,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.black,
-                            shadows: [
-                              Shadow(
-                                blurRadius: 3,
-                                color: Colors.grey,
-                                offset: Offset(1, 4),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                      Positioned(
-                        top: 50,
-                        left: 110,
-                        child: Text(
-                          "REGISTER",
-                          style: TextStyle(
-                            fontSize: 20,
-                            fontWeight: FontWeight.w500,
-                            color: Colors.black,
-                            shadows: [
-                              Shadow(
-                                blurRadius: 3,
-                                color: Colors.grey,
-                                offset: Offset(1, 5),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
+                const LetsRegisterWidget(),
 
                 const SizedBox(height: 30),
 
