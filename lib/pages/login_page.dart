@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:project/pages/settings_page.dart';
 import 'package:project/pages/home_page.dart';
 import '../widgets/login/login_button.dart';
@@ -7,15 +8,40 @@ import '../pages/registration_page.dart';
 import '../widgets/login/sign_in_with.dart';
 import '../widgets/login/dont_have_account.dart';
 import '../widgets/login/login_username_password_box.dart';
+import '../widgets/all_Lets/lets_start.dart';
 
 class LoginPage extends StatelessWidget {
   const LoginPage({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    final TextEditingController usernameController = TextEditingController();
-    final TextEditingController passwordController = TextEditingController();
+  State<LoginPage> createState() => _LoginPageState();
+}
 
+class _LoginPageState extends State<LoginPage> {
+  final TextEditingController usernameController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
+  final FirebaseAuth _auth = FirebaseAuth.instance;
+
+  Future<void> signIn() async {
+    try {
+      await _auth.signInWithEmailAndPassword(
+        email: usernameController.text.trim(),
+        password: passwordController.text.trim(),
+      );
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Login successful!')),
+      );
+      // Μετάβαση σε άλλη σελίδα
+      //Navigator.pushReplacementNamed(context, '/home');
+    } catch (e) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Login failed, try again.')),
+      );
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color(0xFF9CC4C4), // background xrwma
       body: Center(
@@ -25,56 +51,11 @@ class LoginPage extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                const SizedBox(
-                  height: 100,
-                  child: Stack(
-                    clipBehavior: Clip.none,
-                    children: [
-                      Positioned(
-                        top: -10,
-                        left: 110,
-                        child: Text(
-                          "LET'S",
-                          style: TextStyle(
-                            fontSize: 55,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.black,
-                            shadows: [
-                              Shadow(
-                                blurRadius: 3,
-                                color: Colors.grey,
-                                offset: Offset(1, 4),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                      Positioned(
-                        top: 50,
-                        left: 110,
-                        child: Text(
-                          "START",
-                          style: TextStyle(
-                            fontSize: 20,
-                            fontWeight: FontWeight.w500,
-                            color: Colors.black,
-                            shadows: [
-                              Shadow(
-                                blurRadius: 3,
-                                color: Colors.grey,
-                                offset: Offset(1, 5),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
+                const LetsStartWidget(),
 
                 const SizedBox(height: 30),
 
-                // Username Box  !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+                // Username Box
                 UsernamePasswordBox(
                   labelText: "USERNAME",
                   controller: usernameController,
@@ -82,7 +63,7 @@ class LoginPage extends StatelessWidget {
 
                 const SizedBox(height: 5),
 
-                // Password Box!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+                // Password Box
                 UsernamePasswordBox(
                   labelText: "PASSWORD",
                   controller: passwordController,
@@ -91,31 +72,25 @@ class LoginPage extends StatelessWidget {
 
                 const SizedBox(height: 15),
 
-                // Login Button !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+                // Login Button
                 LoginButton(
                   onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => HomePage(),
-                      ),
-                    );// edw to onPressed einai h synarthsh parametros poy pernaw sto login button.
-                    print("ekanes login re bro");
+                    signIn(); // Κλήση της συνάρτησης signIn
                   },
                 ),
 
                 const SizedBox(height: 6),
 
-                // FORFOT YOUR PASSWORD BUTTON !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+                // Forgot Your Password Button
                 ForgotYourPasswordButton(
-                  onPressed: (){
+                  onPressed: () {
                     print("Forgot your password re bro");
                   },
                 ),
 
                 const SizedBox(height: 6),
 
-                // DONT HAVE AN ACCOUNT? SIGN UP TEXT-BUTTON !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+                // Don't Have an Account? Sign Up
                 DontHaveAccount(
                   onButtonPressed: () {
                     Navigator.push(
@@ -129,12 +104,10 @@ class LoginPage extends StatelessWidget {
 
                 const SizedBox(height: 30),
 
-                // MICROSOFT
+                // Microsoft
                 SignInWith(
                   text: "SIGN IN WITH MICROSOFT",
                   onPressed: () {
-                    print("SIGN IN WITH MICROSOFT RE BRO");
-                    // EXW VALEI EDW KAI KALA NA PATAS TO BUTTON GIA NA PAS SETTINGS GIA NA TO TSEKAROYME
                     Navigator.push(
                       context,
                       MaterialPageRoute(
@@ -146,7 +119,7 @@ class LoginPage extends StatelessWidget {
 
                 const SizedBox(height: 10),
 
-                // SIGN UP WITH FACEBOOK !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+                // Sign Up With Facebook
                 SignInWith(
                   text: "SIGN IN WITH FACEBOOK",
                   onPressed: () {
@@ -156,7 +129,7 @@ class LoginPage extends StatelessWidget {
 
                 const SizedBox(height: 10),
 
-                //SIGN UP WITH GOOGLE !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+                // Sign Up With Google
                 SignInWith(
                   text: "SIGN IN WITH GOOGLE",
                   onPressed: () {
@@ -169,5 +142,12 @@ class LoginPage extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    usernameController.dispose();
+    passwordController.dispose();
+    super.dispose();
   }
 }
