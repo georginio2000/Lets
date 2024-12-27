@@ -1,19 +1,21 @@
 import 'package:flutter/material.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false, // Remove debug banner
       home: Scaffold(
         appBar: AppBar(
-          title: Text('Gender Dropdown Menu'),
+          title: const Text('Gender Dropdown Menu'),
         ),
-        body: Center(
+        body: const Center(
           child: GenderDropdownMenu(),
         ),
       ),
@@ -22,6 +24,8 @@ class MyApp extends StatelessWidget {
 }
 
 class GenderDropdownMenu extends StatefulWidget {
+  const GenderDropdownMenu({super.key});
+
   @override
   _GenderDropdownMenuState createState() => _GenderDropdownMenuState();
 }

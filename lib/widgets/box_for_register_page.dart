@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class BoxForRegisterPage extends StatelessWidget {
+class BoxForRegisterPage extends StatefulWidget {
   final String hintText;
   final TextEditingController controller;
   final bool obscureText;
@@ -13,6 +13,30 @@ class BoxForRegisterPage extends StatelessWidget {
     this.obscureText = false,
     this.keyboardType = TextInputType.text,
   });
+
+  @override
+  _BoxForRegisterPageState createState() => _BoxForRegisterPageState();
+}
+
+class _BoxForRegisterPageState extends State<BoxForRegisterPage> {
+  bool _showHintText = true;
+
+  @override
+  void initState() {
+    super.initState();
+
+    widget.controller.addListener(() {
+      setState(() {
+        _showHintText = widget.controller.text.isEmpty;
+      });
+    });
+  }
+
+  @override
+  void dispose() {
+    widget.controller.removeListener(() {});
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -39,9 +63,9 @@ class BoxForRegisterPage extends StatelessWidget {
             ],
           ),
           child: TextField(
-            controller: controller,
-            obscureText: obscureText,
-            keyboardType: keyboardType,
+            controller: widget.controller,
+            obscureText: widget.obscureText,
+            keyboardType: widget.keyboardType,
             decoration: const InputDecoration(
               border: InputBorder.none,
               contentPadding: EdgeInsets.all(5),
@@ -51,17 +75,18 @@ class BoxForRegisterPage extends StatelessWidget {
             ),
           ),
         ),
-        Positioned(
-          top: 5,
-          left: 15,
-          child: Text(
-            hintText,
-            style: const TextStyle(
-              fontSize: 11,
-              color: Colors.black38,
+        if (_showHintText)
+          Positioned(
+            top: 5,
+            left: 15,
+            child: Text(
+              widget.hintText,
+              style: const TextStyle(
+                fontSize: 11,
+                color: Colors.black38,
+              ),
             ),
           ),
-        ),
       ],
     );
   }

@@ -4,9 +4,9 @@ class DontHaveAccount extends StatelessWidget {
   final VoidCallback onButtonPressed;
 
   const DontHaveAccount({
-    Key? key,
+    super.key,
     required this.onButtonPressed,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

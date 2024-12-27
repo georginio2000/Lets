@@ -5,10 +5,10 @@ class SignInWith extends StatelessWidget {
   final VoidCallback onPressed;
 
   const SignInWith({
-    Key? key,
+    super.key,
     required this.text,
     required this.onPressed,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

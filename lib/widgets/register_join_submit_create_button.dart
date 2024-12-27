@@ -6,11 +6,11 @@ class RegisterJoinSubmitCreateButton extends StatelessWidget {
   final Color color;
 
   const RegisterJoinSubmitCreateButton({
-    Key? key,
+    super.key,
     required this.labelText,
     required this.onPressed,
     required this.color,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -44,7 +44,7 @@ class RegisterJoinSubmitCreateButton extends StatelessWidget {
         ),
         child: Text(
           labelText,
-          style: TextStyle(
+          style: const TextStyle(
             fontSize: 14,
             fontWeight: FontWeight.bold,
             color: Colors.black,

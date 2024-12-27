@@ -147,8 +147,8 @@ class RegistrationPage extends StatelessWidget {
                       controller: ageController,
                       keyboardType: TextInputType.number,
                     ),
-                    SizedBox(width: 20),
-                    GenderDropdownMenu(),
+                    const SizedBox(width: 20),
+                    const GenderDropdownMenu(),
                   ]
                 ),
                 const SizedBox(height: 45),
@@ -158,7 +158,7 @@ class RegistrationPage extends StatelessWidget {
                   children: [
                     RegisterJoinSubmitCreateButton(
                       labelText: "BACK",
-                      color: Color(0xFFB47150),
+                      color: const Color(0xFFB47150),
                       onPressed: () {
                         Navigator.push(
                           context,
@@ -169,10 +169,10 @@ class RegistrationPage extends StatelessWidget {
                         print("BACK O BRO, WRAIOS");
                       },
                     ),
-                    SizedBox(width: 30),
+                    const SizedBox(width: 30),
                     RegisterJoinSubmitCreateButton(
                       labelText: "REGISTER",
-                      color: Color(0xFF50B498),
+                      color: const Color(0xFF50B498),
                       onPressed: () {
                         print("REGISTER O BRO, WRAIOS");
                       },

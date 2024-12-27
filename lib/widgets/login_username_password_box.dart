@@ -6,11 +6,11 @@ class UsernamePasswordBox extends StatelessWidget {
   final bool obscureText;
 
   const UsernamePasswordBox({
-    Key? key,
+    super.key,
     required this.labelText,
     required this.controller,
     this.obscureText = false,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

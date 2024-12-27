@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class AgeBox extends StatelessWidget {
+class AgeBox extends StatefulWidget {
   final TextEditingController controller;
   final TextInputType keyboardType;
 
@@ -9,6 +9,30 @@ class AgeBox extends StatelessWidget {
     required this.controller,
     this.keyboardType = TextInputType.text,
   });
+
+  @override
+  _AgeBoxState createState() => _AgeBoxState();
+}
+
+class _AgeBoxState extends State<AgeBox> {
+  bool _showHintText = true;
+
+  @override
+  void initState() {
+    super.initState();
+
+    widget.controller.addListener(() {
+      setState(() {
+        _showHintText = widget.controller.text.isEmpty;
+      });
+    });
+  }
+
+  @override
+  void dispose() {
+    widget.controller.removeListener(() {});
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -35,28 +59,29 @@ class AgeBox extends StatelessWidget {
             ],
           ),
           child: TextField(
-            controller: controller,
-            keyboardType: keyboardType,
+            controller: widget.controller,
+            keyboardType: widget.keyboardType,
             decoration: const InputDecoration(
               border: InputBorder.none,
-              contentPadding: EdgeInsets.only(top: 15, left: 5), // Ρυθμίζει το input
+              contentPadding: EdgeInsets.only(top: 15, left: 5),
             ),
             style: const TextStyle(
               color: Colors.black,
             ),
           ),
         ),
-        Positioned(
-          top: 5,
-          left: 15,
-          child: Text(
-            "AGE",
-            style: const TextStyle(
-              fontSize: 11,
-              color: Colors.black38,
+        if (_showHintText)
+          const Positioned(
+            top: 5,
+            left: 15,
+            child: Text(
+              "AGE",
+              style: TextStyle(
+                fontSize: 11,
+                color: Colors.black38,
+              ),
             ),
           ),
-        ),
       ],
     );
   }
