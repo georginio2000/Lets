@@ -58,70 +58,88 @@ class NavigationBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      height: 80, // Set the height of the navigation bar here
-      child: BottomAppBar(
-        color: Color(0xFF468585), // Background color of the navigation bar
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly, // Evenly distribute items
-          children: <Widget>[
-            IconButton(
-              icon: SvgPicture.asset(
-                'assets/HOME_ICON.svg', // Path to your SVG file
-                height: 50,             // Set the height
-                color: selectedIndex == 0 ? Colors.white : Colors.black, // Change color based on selected index
-              ),
-              onPressed: () {
-                onIconTapped(0); // Pass the index to the callback
-              },
-              tooltip: 'Home',
-            ),
-            IconButton(
-              icon: SvgPicture.asset(
-                'assets/FREINDS_ICON.svg', // Path to your SVG file
-                height: 30,             // Set the height
-                color: selectedIndex == 1 ? Colors.white : Colors.black, // Change color based on selected index
-              ),
-              onPressed: () {
-                onIconTapped(1); // Pass the index to the callback
-              },
-              tooltip: 'Friends',
-            ),
-            IconButton(
-              icon: SvgPicture.asset(
-                'assets/ADD_ICON.svg', // Path to your SVG file
-                height: 30,             // Set the height
-                color: selectedIndex == 2 ? Colors.white : Colors.black, // Change color based on selected index
-              ),
-              onPressed: () {
-                onIconTapped(2); // Pass the index to the callback
-              },
-              tooltip: 'Add',
-            ),
-            IconButton(
-              icon: SvgPicture.asset(
-                'assets/MAP_ICON_APPBAR.svg', // Path to your SVG file
-                height: 30,             // Set the height
-                color: selectedIndex == 3 ? Colors.white : Colors.black, // Change color based on selected index
-              ),
-              onPressed: () {
-                onIconTapped(3); // Pass the index to the callback
-              },
-              tooltip: 'Map',
-            ),
-            IconButton(
-              icon: SvgPicture.asset(
-                'assets/PROFILE_ICON.svg', // Path to your SVG file
-                height: 30,             // Set the height
-                color: selectedIndex == 4 ? Colors.white : Colors.black, // Change color based on selected index
-              ),
-              onPressed: () {
-                onIconTapped(4); // Pass the index to the callback
-              },
-              tooltip: 'Profile',
-            ),
-          ],
+    return Container(
+      height: 60, // Set the height of the navigation bar
+      decoration: BoxDecoration(
+        color: Color(0xFF468585), // Background color
+        border: Border(
+          top: BorderSide(width: 1.0, color: Colors.black), // Optional border
         ),
+      ), // Fixed missing closing parenthesis for BoxDecoration
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly, // Evenly distribute items
+        children: <Widget>[
+          IconButton(
+            icon: SvgPicture.asset(
+              'assets/HOME_ICON.svg', // Path to your SVG file
+              height: 30,             // Set the height
+              colorFilter: ColorFilter.mode(
+                selectedIndex == 0 ? Colors.white : Colors.black,
+                BlendMode.srcIn,
+              ), // Use ColorFilter for SVG color
+            ),
+            onPressed: () {
+              onIconTapped(0); // Pass the index to the callback
+            },
+            tooltip: 'Home',
+          ),
+          IconButton(
+            icon: SvgPicture.asset(
+              'assets/FREINDS_ICON.svg', // Path to your SVG file
+              height: 30,             // Set the height
+              colorFilter: ColorFilter.mode(
+                selectedIndex == 1 ? Colors.white : Colors.black,
+                BlendMode.srcIn,
+              ), // Use ColorFilter for SVG color
+            ),
+            onPressed: () {
+              onIconTapped(1); // Pass the index to the callback
+            },
+            tooltip: 'Friends',
+          ),
+          IconButton(
+            icon: SvgPicture.asset(
+              'assets/ADD_ICON.svg', // Path to your SVG file
+              height: 30,             // Set the height
+              colorFilter: ColorFilter.mode(
+                selectedIndex == 2 ? Colors.white : Colors.black,
+                BlendMode.srcIn,
+              ), // Use ColorFilter for SVG color
+            ),
+            onPressed: () {
+              onIconTapped(2); // Pass the index to the callback
+            },
+            tooltip: 'Add',
+          ),
+          IconButton(
+            icon: SvgPicture.asset(
+              'assets/MAP_ICON_APPBAR.svg', // Path to your SVG file
+              height: 30,             // Set the height
+              colorFilter: ColorFilter.mode(
+                selectedIndex == 3 ? Colors.white : Colors.black,
+                BlendMode.srcIn,
+              ), // Use ColorFilter for SVG color
+            ),
+            onPressed: () {
+              onIconTapped(3); // Pass the index to the callback
+            },
+            tooltip: 'Map',
+          ),
+          IconButton(
+            icon: SvgPicture.asset(
+              'assets/PROFILE_ICON.svg', // Path to your SVG file
+              height: 30,             // Set the height
+              colorFilter: ColorFilter.mode(
+                selectedIndex == 4 ? Colors.white : Colors.black,
+                BlendMode.srcIn,
+              ), // Use ColorFilter for SVG color
+            ),
+            onPressed: () {
+              onIconTapped(4); // Pass the index to the callback
+            },
+            tooltip: 'Profile',
+          ),
+        ],
       ),
     );
   }
