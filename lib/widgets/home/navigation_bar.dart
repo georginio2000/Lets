@@ -2,13 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return const MaterialApp(
       debugShowCheckedModeBanner: false,
       home: HomePage(),
     );
@@ -16,6 +18,8 @@ class MyApp extends StatelessWidget {
 }
 
 class HomePage extends StatefulWidget {
+  const HomePage({super.key});
+
   @override
   _HomePageState createState() => _HomePageState();
 }
@@ -24,18 +28,18 @@ class _HomePageState extends State<HomePage> {
   int _selectedIndex = 0; // To track the selected icon/page
 
   final List<Widget> _pages = [
-    Center(child: Text('Home Page', style: TextStyle(fontSize: 24))),
-    Center(child: Text('Friends Page', style: TextStyle(fontSize: 24))),
-    Center(child: Text('Add Page', style: TextStyle(fontSize: 24))),
-    Center(child: Text('Map Page', style: TextStyle(fontSize: 24))),
-    Center(child: Text('Profile Page', style: TextStyle(fontSize: 24))),
+    const Center(child: Text('Home Page', style: TextStyle(fontSize: 24))),
+    const Center(child: Text('Friends Page', style: TextStyle(fontSize: 24))),
+    const Center(child: Text('Add Page', style: TextStyle(fontSize: 24))),
+    const Center(child: Text('Map Page', style: TextStyle(fontSize: 24))),
+    const Center(child: Text('Profile Page', style: TextStyle(fontSize: 24))),
   ];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Navigation Bar Example'),
+        title: const Text('Navigation Bar Example'),
       ),
       body: _pages[_selectedIndex], // Display the selected page
       bottomNavigationBar: NavigationBar(
@@ -54,13 +58,13 @@ class NavigationBar extends StatelessWidget {
   final int selectedIndex; // Current selected index
   final Function(int) onIconTapped; // Callback for icon taps
 
-  NavigationBar({required this.selectedIndex, required this.onIconTapped});
+  const NavigationBar({super.key, required this.selectedIndex, required this.onIconTapped});
 
   @override
   Widget build(BuildContext context) {
     return Container(
       height: 60, // Set the height of the navigation bar
-      decoration: BoxDecoration(
+      decoration: const BoxDecoration(
         color: Color(0xFF468585), // Background color
         border: Border(
           top: BorderSide(width: 1.0, color: Colors.black), // Optional border

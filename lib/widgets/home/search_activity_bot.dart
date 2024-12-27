@@ -6,11 +6,11 @@ class SearchWithFilter extends StatelessWidget {
   final VoidCallback onFilterPressed;
 
   const SearchWithFilter({
-    Key? key,
+    super.key,
     required this.searchController,
     required this.onSearchPressed,
     required this.onFilterPressed,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
