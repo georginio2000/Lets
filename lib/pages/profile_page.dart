@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import '../widgets/my_profile_page/settings_button.dart';
 import '../pages/settings_page.dart';
 import '../widgets/my_profile_page/add_friend_button.dart';
+import '../widgets/my_profile_page/profile_pic_username.dart';
 
 class ProfilePage extends StatelessWidget {
   @override
@@ -32,12 +33,13 @@ class ProfilePage extends StatelessWidget {
                 top: 30,
                 left: 20,
                 child: AddFriendButton(
-                  onPressed: () {
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(content: Text("Add Friend Button Pressed!")),
-                    );
-                  },
+                  onPressed: () {},
                 ),
+              ),
+              Positioned(
+                top: 120,
+                left: MediaQuery.of(context).size.width / 2 - 60,
+                child: const ProfileWidget(),
               ),
               // Προσθέστε οποιοδήποτε άλλο περιεχόμενο εδώ
             ],
