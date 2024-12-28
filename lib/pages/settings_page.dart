@@ -8,6 +8,9 @@ import '../widgets/settings/about_lets_dialog.dart';
 import 'login_page.dart';
 import '../widgets/settings/faq.dart';
 import '../widgets/settings/feedback_support_dialog.dart';
+import '../widgets/settings/change_password_dialog.dart'; // Import του αρχείου
+import '../widgets/settings/change_username_dialog.dart';
+
 class SettingsPage extends StatelessWidget {
   const SettingsPage({super.key});
 
@@ -56,12 +59,16 @@ class SettingsPage extends StatelessWidget {
                   const SizedBox(height: 30),
                   SettingsBox(
                     labelText: "CHANGE YOUR PASSWORD",
-                    onPressed: () {},
+                    onPressed: () {
+                      ChangePasswordDialog.show(context);
+                    },
                   ),
                   const SizedBox(height: 30),
                   SettingsBox(
-                    labelText: "CHANGE YOUR EMAIL",
-                    onPressed: () {},
+                    labelText: "CHANGE YOUR USERNAME",
+                    onPressed: () {
+                      ChangeUsernameDialog.show(context);
+                    },
                   ),
                   const SizedBox(height: 30),
                   SettingsBox(
