@@ -4,12 +4,14 @@ class UsernamePasswordBox extends StatelessWidget {
   final String labelText;
   final TextEditingController controller;
   final bool obscureText;
+  final Widget? suffixIcon;
 
   const UsernamePasswordBox({
     super.key,
     required this.labelText,
     required this.controller,
     this.obscureText = false,
+    this.suffixIcon,
   });
 
   @override
@@ -50,9 +52,10 @@ class UsernamePasswordBox extends StatelessWidget {
           child: TextField(
             controller: controller,
             obscureText: obscureText,
-            decoration: const InputDecoration(
+            decoration: InputDecoration(
               border: InputBorder.none,
-              contentPadding: EdgeInsets.all(10),
+              contentPadding: const EdgeInsets.all(10),
+              suffixIcon: suffixIcon,
             ),
             style: const TextStyle(
               color: Colors.black,

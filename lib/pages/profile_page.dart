@@ -3,6 +3,7 @@ import '../widgets/my_profile_page/settings_button.dart';
 import '../pages/settings_page.dart';
 import '../widgets/my_profile_page/add_friend_button.dart';
 import '../widgets/my_profile_page/profile_pic_username.dart';
+import '../widgets/my_profile_page/numbers_of_friends_activities.dart';
 
 class ProfilePage extends StatelessWidget {
   @override
@@ -41,6 +42,11 @@ class ProfilePage extends StatelessWidget {
                 left: MediaQuery.of(context).size.width / 2 - 60,
                 child: const ProfileWidget(),
               ),
+              Positioned(
+                  top: 320,
+                  left: MediaQuery.of(context).size.width / 2 - 130 ,
+                  child: const FriendsActivitiesWidget(),
+              )
               // Προσθέστε οποιοδήποτε άλλο περιεχόμενο εδώ
             ],
           ),

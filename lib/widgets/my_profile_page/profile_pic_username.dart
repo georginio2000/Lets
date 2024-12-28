@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class ProfileWidget extends StatelessWidget {
   const ProfileWidget({super.key});
@@ -42,10 +43,11 @@ class ProfileWidget extends StatelessWidget {
                 color: const Color(0xFFE0E0E0), // Light grey background
                 border: Border.all(color: Colors.black, width: 1.0),
               ),
-              child: const Icon(
-                Icons.person,
-                size: 60,
-                color: Colors.black,
+              child: SvgPicture.asset(
+                'assets/profile_pic.svg', // Διαδρομή στο SVG icon στα assets
+                width: 80,
+                height: 80,
+                fit: BoxFit.contain, // Διασφαλίζει ότι το SVG χωράει σωστά
               ),
             ),
             const SizedBox(height: 10),

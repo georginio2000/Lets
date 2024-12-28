@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class AddFriendButton extends StatelessWidget {
   final VoidCallback onPressed;
@@ -27,7 +28,12 @@ class AddFriendButton extends StatelessWidget {
         ],
       ),
       child: IconButton(
-        icon: const Icon(Icons.person_add, color: Colors.black),
+        icon: SvgPicture.asset(
+          'assets/add_friend_icon.svg', // Path to the SVG icon
+          fit: BoxFit.contain,
+          width: 24,
+          height: 24,
+        ),
         iconSize: 24,
         onPressed: onPressed,
       ),
