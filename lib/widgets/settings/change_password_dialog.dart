@@ -5,9 +5,9 @@ class ChangePasswordDialog {
   static void show(BuildContext context) {
     final TextEditingController newPasswordController = TextEditingController();
     final TextEditingController repeatPasswordController = TextEditingController();
-    final FirebaseAuth _auth = FirebaseAuth.instance;
+    final FirebaseAuth auth = FirebaseAuth.instance;
 
-    Future<void> _updatePassword() async {
+    Future<void> updatePassword() async {
       if (newPasswordController.text.trim() != repeatPasswordController.text.trim()) {
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(content: Text('Passwords do not match!')),
@@ -23,7 +23,7 @@ class ChangePasswordDialog {
       }
 
       try {
-        User? user = _auth.currentUser;
+        User? user = auth.currentUser;
         if (user != null) {
           await user.updatePassword(newPasswordController.text.trim());
           ScaffoldMessenger.of(context).showSnackBar(
@@ -124,7 +124,7 @@ class ChangePasswordDialog {
                     Align(
                       alignment: Alignment.centerRight,
                       child: ElevatedButton(
-                        onPressed: _updatePassword,
+                        onPressed: updatePassword,
                         style: ElevatedButton.styleFrom(
                           backgroundColor: const Color(0xFF50B498),
                           shape: RoundedRectangleBorder(

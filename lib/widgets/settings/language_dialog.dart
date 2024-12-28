@@ -23,9 +23,9 @@ class LanguageDialog {
                           color: const Color(0xFF9CC4C4),
                           borderRadius: BorderRadius.circular(0),
                         ),
-                        child: Column(
+                        child: const Column(
                           mainAxisAlignment: MainAxisAlignment.center,
-                          children: const [
+                          children: [
                             Text(
                               "LANGUAGE",
                               style: TextStyle(

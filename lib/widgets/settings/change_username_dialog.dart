@@ -5,10 +5,10 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 class ChangeUsernameDialog {
   static void show(BuildContext context) {
     final TextEditingController newUsernameController = TextEditingController();
-    final FirebaseAuth _auth = FirebaseAuth.instance;
-    final FirebaseFirestore _firestore = FirebaseFirestore.instance;
+    final FirebaseAuth auth = FirebaseAuth.instance;
+    final FirebaseFirestore firestore = FirebaseFirestore.instance;
 
-    Future<void> _updateUsername() async {
+    Future<void> updateUsername() async {
       if (newUsernameController.text.trim().isEmpty) {
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(content: Text('Username cannot be empty!')),
@@ -17,10 +17,10 @@ class ChangeUsernameDialog {
       }
 
       try {
-        User? user = _auth.currentUser;
+        User? user = auth.currentUser;
         if (user != null) {
           // Ενημέρωση του username στο Firestore
-          await _firestore.collection('users').doc(user.uid).update({
+          await firestore.collection('users').doc(user.uid).update({
             'username': newUsernameController.text.trim(),
           });
           ScaffoldMessenger.of(context).showSnackBar(
@@ -102,7 +102,7 @@ class ChangeUsernameDialog {
                     Align(
                       alignment: Alignment.centerRight,
                       child: ElevatedButton(
-                        onPressed: _updateUsername,
+                        onPressed: updateUsername,
                         style: ElevatedButton.styleFrom(
                           backgroundColor: const Color(0xFF50B498),
                           shape: RoundedRectangleBorder(

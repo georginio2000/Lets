@@ -5,7 +5,7 @@ class CustomNavigationBar extends StatelessWidget { // Rename to CustomNavigatio
   final int selectedIndex; // Current selected index
   final Function(int) onIconTapped; // Callback for icon taps
 
-  CustomNavigationBar({required this.selectedIndex, required this.onIconTapped});
+  const CustomNavigationBar({super.key, required this.selectedIndex, required this.onIconTapped});
 
   @override
   Widget build(BuildContext context) {

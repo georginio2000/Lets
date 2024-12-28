@@ -3,7 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class FriendsActivitiesWidget extends StatelessWidget {
-  const FriendsActivitiesWidget({Key? key}) : super(key: key);
+  const FriendsActivitiesWidget({super.key});
 
   Future<int> _getFriendsCount() async {
     final User? user = FirebaseAuth.instance.currentUser;
@@ -50,6 +50,7 @@ class FriendsActivitiesWidget extends StatelessWidget {
             return _buildStatisticBox('ACTIVITIES', snapshot.data.toString());
           },
         ),
+        // Add space between sections
         const SizedBox(width: 130),
         // Friends Section
         FutureBuilder<int>(
@@ -71,6 +72,7 @@ class FriendsActivitiesWidget extends StatelessWidget {
   Widget _buildStatisticBox(String label, String value) {
     return Column(
       mainAxisSize: MainAxisSize.min,
+      crossAxisAlignment: CrossAxisAlignment.center, // Center align the text horizontally
       children: [
         Text(
           label,
@@ -88,6 +90,7 @@ class FriendsActivitiesWidget extends StatelessWidget {
             fontWeight: FontWeight.bold,
             color: Colors.black,
           ),
+          textAlign: TextAlign.center, // Ensures the number is centered
         ),
       ],
     );

@@ -7,6 +7,8 @@ import 'package:project/pages/map_page.dart';
 import 'package:project/pages/profile_page.dart';
 
 class MainScreen extends StatefulWidget {
+  const MainScreen({super.key});
+
   @override
   _MainScreenState createState() => _MainScreenState();
 }
@@ -16,10 +18,10 @@ class _MainScreenState extends State<MainScreen> {
 
   // List of pages corresponding to each navigation bar icon
   final List<Widget> _pages = [
-    HomePage(),
-    FriendsPage(),
-    AddPage(),
-    MapPage(),
+    const HomePage(),
+    const FriendsPage(),
+    const AddPage(),
+    const MapPage(),
     ProfilePage(),
   ];
 
