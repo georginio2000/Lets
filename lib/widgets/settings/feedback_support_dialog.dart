@@ -18,13 +18,13 @@ class FeedbackSupportDialog {
                   return Container(
                     padding: const EdgeInsets.all(20),
                     decoration: BoxDecoration(
-                      color: const Color(0xFF9CC4C4), // Ανοιχτό γκρι φόντο
+                      color: const Color(0xFF9CC4C4),
                       borderRadius: BorderRadius.circular(10),
                     ),
                     constraints: const BoxConstraints(
-                      minWidth: 367, // Σταθερό πλάτος
-                      minHeight: 200, // Ελάχιστο ύψος
-                      maxHeight: 400, // Μέγιστο ύψος για αποφυγή overflow
+                      minWidth: 367,
+                      minHeight: 200,
+                      maxHeight: 400,
                     ),
                     child: Column(
                       mainAxisSize: MainAxisSize.min,
@@ -43,7 +43,7 @@ class FeedbackSupportDialog {
                             ),
                             GestureDetector(
                               onTap: () {
-                                Navigator.of(context).pop(); // Κλείσιμο του Dialog
+                                Navigator.of(context).pop();
                               },
                               child: const Icon(Icons.close, color: Colors.black),
                             ),
@@ -63,23 +63,23 @@ class FeedbackSupportDialog {
                             child: ConstrainedBox(
                               constraints: const BoxConstraints(
                                 minHeight: 50,
-                                maxHeight: 300, // Περιορισμός ύψους για το TextField
+                                maxHeight: 300,
                               ),
                               child: TextField(
                                 controller: feedbackController,
-                                maxLength: 100, // Μέγιστο 100 χαρακτήρες
-                                maxLines: null, // Απεριόριστες γραμμές
+                                maxLength: 100,
+                                maxLines: null,
                                 onChanged: (text) {
-                                  setState(() {}); // Ανανεώνει το ύψος
+                                  setState(() {});
                                 },
                                 decoration: InputDecoration(
                                   filled: true,
-                                  fillColor: Colors.white, // Λευκό φόντο για το TextField
+                                  fillColor: Colors.white,
                                   hintText: "Type your feedback here...",
                                   border: OutlineInputBorder(
                                     borderRadius: BorderRadius.circular(0),
                                   ),
-                                  counterText: '', // Δεν εμφανίζει μετρητή χαρακτήρων
+                                  counterText: '',
                                 ),
                               ),
                             ),
@@ -90,7 +90,6 @@ class FeedbackSupportDialog {
                           alignment: Alignment.centerRight,
                           child: ElevatedButton(
                             onPressed: () {
-                              // Κλείνει το παράθυρο και εμφανίζει μήνυμα
                               Navigator.of(context).pop();
                               ScaffoldMessenger.of(context).showSnackBar(
                                 const SnackBar(
@@ -100,7 +99,7 @@ class FeedbackSupportDialog {
                               );
                             },
                             style: ElevatedButton.styleFrom(
-                              backgroundColor: const Color(0xFF50B498), // Πράσινο χρώμα κουμπιού
+                              backgroundColor: const Color(0xFF50B498),
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(10),
                               ),

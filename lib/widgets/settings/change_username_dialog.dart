@@ -26,7 +26,7 @@ class ChangeUsernameDialog {
           ScaffoldMessenger.of(context).showSnackBar(
             const SnackBar(content: Text('Username updated successfully!')),
           );
-          Navigator.of(context).pop(); // Κλείσιμο του παραθύρου μετά την επιτυχία
+          Navigator.of(context).pop();
         } else {
           ScaffoldMessenger.of(context).showSnackBar(
             const SnackBar(content: Text('No user logged in!')),
@@ -51,12 +51,12 @@ class ChangeUsernameDialog {
               return Container(
                 padding: const EdgeInsets.all(20),
                 decoration: BoxDecoration(
-                  color: const Color(0xFF9CC4C4), // Ανοιχτό γκρι φόντο
+                  color: const Color(0xFF9CC4C4),
                   borderRadius: BorderRadius.circular(10),
                 ),
                 constraints: const BoxConstraints(
-                  minWidth: 367, // Σταθερό πλάτος
-                  maxHeight: 250, // Μέγιστο ύψος
+                  minWidth: 367,
+                  maxHeight: 250,
                 ),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -75,7 +75,7 @@ class ChangeUsernameDialog {
                         ),
                         GestureDetector(
                           onTap: () {
-                            Navigator.of(context).pop(); // Κλείσιμο του Dialog
+                            Navigator.of(context).pop();
                           },
                           child: const Icon(Icons.close, color: Colors.black),
                         ),
@@ -104,7 +104,7 @@ class ChangeUsernameDialog {
                       child: ElevatedButton(
                         onPressed: _updateUsername,
                         style: ElevatedButton.styleFrom(
-                          backgroundColor: const Color(0xFF50B498), // Πράσινο κουμπί
+                          backgroundColor: const Color(0xFF50B498),
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(10),
                           ),
