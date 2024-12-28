@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../widgets/home/navigation_bar.dart'; // Import the CustomNavigationBar widget
+import '../widgets/general/navigation_bar.dart'; // Import the CustomNavigationBar widget
 import 'package:project/pages/home_page.dart';
 import 'package:project/pages/friends_page.dart';
 import 'package:project/pages/add_page.dart';

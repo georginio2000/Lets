@@ -6,7 +6,7 @@ class LetsExploreWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const SizedBox(
-      height: 100,
+      height: 80,
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [

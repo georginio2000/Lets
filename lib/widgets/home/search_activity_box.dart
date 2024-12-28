@@ -22,6 +22,7 @@ class SearchWithFilter extends StatelessWidget {
             height: 45,
             decoration: BoxDecoration(
               color: const Color(0xFFE5E1DA),
+              borderRadius: BorderRadius.circular(2), // Add border radius
               border: Border.all(
                 color: Colors.black,
                 width: 1.0,
