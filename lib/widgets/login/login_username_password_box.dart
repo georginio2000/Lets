@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class UsernamePasswordBox extends StatelessWidget {
+class UsernamePasswordBox extends StatefulWidget {
   final String labelText;
   final TextEditingController controller;
   final bool obscureText;
@@ -15,6 +15,31 @@ class UsernamePasswordBox extends StatelessWidget {
   });
 
   @override
+  _UsernamePasswordBoxState createState() => _UsernamePasswordBoxState();
+}
+
+class _UsernamePasswordBoxState extends State<UsernamePasswordBox> {
+  bool isTextEmpty = true; // Αρχικά το πεδίο θεωρείται κενό
+
+  @override
+  void initState() {
+    super.initState();
+    widget.controller.addListener(_checkText); // Listener για αλλαγές στο πεδίο
+  }
+
+  void _checkText() {
+    setState(() {
+      isTextEmpty = widget.controller.text.isEmpty;
+    });
+  }
+
+  @override
+  void dispose() {
+    widget.controller.removeListener(_checkText); // Καθαρισμός του listener
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -22,7 +47,7 @@ class UsernamePasswordBox extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.only(bottom: 1),
           child: Text(
-            labelText,
+            widget.labelText,
             style: const TextStyle(
               fontSize: 11,
               color: Colors.black,
@@ -50,12 +75,14 @@ class UsernamePasswordBox extends StatelessWidget {
             ],
           ),
           child: TextField(
-            controller: controller,
-            obscureText: obscureText,
+            controller: widget.controller,
+            obscureText: widget.obscureText,
             decoration: InputDecoration(
               border: InputBorder.none,
               contentPadding: const EdgeInsets.all(10),
-              suffixIcon: suffixIcon,
+              suffixIcon: isTextEmpty
+                  ? null // Δεν εμφανίζεται το εικονίδιο αν το πεδίο είναι κενό
+                  : widget.suffixIcon,
             ),
             style: const TextStyle(
               color: Colors.black,
