@@ -1,16 +1,22 @@
 import 'package:flutter/material.dart';
+import '../widgets/my_profile_page/settings_button.dart';
+import '../pages/settings_page.dart';
 
 class ProfilePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Profile Page'), // Optional AppBar
-      ),
+      backgroundColor: const Color(0xFF9CC4C4),
       body: Center(
-        child: Text(
-          'This is an empty page.',
-          style: TextStyle(fontSize: 18, color: Colors.grey),
+        child: SettingsIcon(
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => const SettingsPage(),
+              ),
+            );
+          },
         ),
       ),
     );
