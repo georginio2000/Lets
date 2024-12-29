@@ -13,6 +13,8 @@ class _AddPageState extends State<AddPage> {
   final TextEditingController titleController = TextEditingController();
   final TextEditingController descriptionController = TextEditingController();
   final TextEditingController numParticipantsController = TextEditingController();
+  final TextEditingController searchController = TextEditingController();
+
   List<String> tags = []; // Tags fetched from Firestore
   final List<String> selectedTags = [];
 
@@ -404,28 +406,34 @@ class _AddPageState extends State<AddPage> {
               const SizedBox(height: 20),
               isLoadingTags
                   ? const Center(child: CircularProgressIndicator())
-                  : _styledContainer(
-                child: DropdownButtonFormField<String>(
-                  hint: const Text("CHOOSE TAGS"),
-                  items: tags
-                      .map((tag) => DropdownMenuItem<String>(
-                    value: tag,
-                    child: Text(tag),
-                  ))
-                      .toList(),
-                  onChanged: (tag) {
-                    if (tag != null && !selectedTags.contains(tag)) {
+                  :  Container(
+                decoration: BoxDecoration(
+                  color: const Color(0xFFE5E1DA), // Set the fill color
+                  borderRadius: BorderRadius.circular(5), // Rounded corners for the dropdown button
+                ),
+                child:DropdownMenu<String>(
+                  width: MediaQuery.of(context).size.width * 1, // Make the box wider
+                  enableFilter: true, // Enable filtering
+                  requestFocusOnTap: true, // Automatically focus search input on tap
+                  controller: searchController, // Attach the controller for the search box
+                  hintText: "CHOOSE TAGS", // Placeholder text
+                  textStyle: TextStyle(
+                    color: Colors.teal.shade900, // Text color for the box
+                    fontWeight: FontWeight.bold,
+                  ),
+                  onSelected: (String? newTag) {
+                    if (newTag != null && !selectedTags.contains(newTag)) {
                       setState(() {
-                        selectedTags.add(tag);
+                        selectedTags.add(newTag); // Add the selected tag
                       });
                     }
                   },
-                  decoration: const InputDecoration(
-                    filled: true,
-                    fillColor: Colors.transparent,
-                    border: InputBorder.none,
-                    contentPadding: EdgeInsets.all(10),
-                  ),
+                  dropdownMenuEntries: tags
+                      .map((tag) => DropdownMenuEntry<String>(
+                    value: tag,
+                    label: tag,
+                  ))
+                      .toList(),
                 ),
               ),
               const SizedBox(height: 8),
