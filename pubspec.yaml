@@ -37,6 +37,8 @@ dependencies:
   dropdown_search: ^5.0.3
   firebase_storage: ^11.0.10
   image_picker: ^0.8.7+5 # For picking images from the device
+  firebase_messaging: ^14.7.1
+
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.8
@@ -72,6 +74,12 @@ flutter:
     - assets/PARTICIPANTS_ICON.svg
     - assets/SMALL_MAP_ICON.svg
     - assets/FILTER_ICON.svg
+    - assets/settings_icon.svg
+    - assets/profile_pic.svg
+    - assets/add_friend_iconn.svg
+    - assets/ADD_FRIEND_ICON.svg
+    - assets/SEARCH_ICON.svg
+    - assets/EXTRA_SMALL_PROFILE.svg
   # To add assets to your application, add an assets section, like this:
   # assets:
   #   - images/a_dot_burr.jpeg

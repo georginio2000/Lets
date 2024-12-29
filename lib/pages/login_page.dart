@@ -18,14 +18,15 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-  final TextEditingController usernameController = TextEditingController();
+  final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
   final FirebaseAuth _auth = FirebaseAuth.instance;
+  bool _isPasswordVisible = false;
 
   Future<void> signIn() async {
     try {
       await _auth.signInWithEmailAndPassword(
-        email: usernameController.text.trim(),
+        email: emailController.text.trim(),
         password: passwordController.text.trim(),
       );
       ScaffoldMessenger.of(context).showSnackBar(
@@ -34,11 +35,9 @@ class _LoginPageState extends State<LoginPage> {
       Navigator.push(
         context,
         MaterialPageRoute(
-          builder: (context) => MainScreen(),
+          builder: (context) => const MainScreen(),
         ),
       );
-      // Μετάβαση σε άλλη σελίδα
-      //Navigator.pushReplacementNamed(context, '/home');
     } catch (e) {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(content: Text('Login failed, try again.')),
@@ -64,16 +63,28 @@ class _LoginPageState extends State<LoginPage> {
                 // Username Box
                 UsernamePasswordBox(
                   labelText: "USERNAME",
-                  controller: usernameController,
+                  controller: emailController,
+                  obscureText: false,
                 ),
 
-                const SizedBox(height: 5),
+                const SizedBox(height: 15),
 
-                // Password Box
+                // Password Box with Toggle
                 UsernamePasswordBox(
                   labelText: "PASSWORD",
                   controller: passwordController,
-                  obscureText: true,
+                  obscureText: !_isPasswordVisible,
+                  suffixIcon: IconButton(
+                    icon: Icon(
+                      _isPasswordVisible ? Icons.visibility : Icons.visibility_off,
+                      color: Colors.black,
+                    ),
+                    onPressed: () {
+                      setState(() {
+                        _isPasswordVisible = !_isPasswordVisible;
+                      });
+                    },
+                  ),
                 ),
 
                 const SizedBox(height: 15),
@@ -81,7 +92,7 @@ class _LoginPageState extends State<LoginPage> {
                 // Login Button
                 LoginButton(
                   onPressed: () {
-                    signIn(); // Κλήση της συνάρτησης signIn
+                    signIn();
                   },
                 ),
 
@@ -152,7 +163,7 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   void dispose() {
-    usernameController.dispose();
+    emailController.dispose();
     passwordController.dispose();
     super.dispose();
   }
