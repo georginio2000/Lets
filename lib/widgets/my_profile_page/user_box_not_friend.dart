@@ -1,13 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:project/pages/profile_page_user.dart';
 
 class AddFriendWidget extends StatelessWidget {
   final String username;
+  final String uid; // Το UID του χρήστη
   final VoidCallback onAddFriendPressed;
 
   const AddFriendWidget({
     super.key,
     required this.username,
+    required this.uid, // Προσθέτουμε το UID ως παράμετρο
     required this.onAddFriendPressed,
   });
 
@@ -34,10 +37,20 @@ class AddFriendWidget extends StatelessWidget {
           Positioned(
             left: 10,
             top: 10,
-            child: SvgPicture.asset(
-              'assets/EXTRA_SMALL_PROFILE.svg',
-              width: 30,
-              height: 30,
+            child: GestureDetector(
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => UserPage(uid: uid), // Περνάμε το UID
+                  ),
+                );
+              },
+              child: SvgPicture.asset(
+                'assets/EXTRA_SMALL_PROFILE.svg',
+                width: 30,
+                height: 30,
+              ),
             ),
           ),
           // Όνομα χρήστη

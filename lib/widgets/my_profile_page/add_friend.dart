@@ -166,11 +166,13 @@ class _AddFriendPopupState extends State<AddFriendPopup> {
                       padding: const EdgeInsets.symmetric(vertical: 8.0),
                       child: AddFriendWidget(
                         username: user['username'] ?? 'Unknown',
+                        uid: user['uid'], // Περνάμε το UID του χρήστη
                         onAddFriendPressed: () {
                           _sendFriendRequest(user['uid']);
                         },
                       ),
                     );
+
                   },
                 ),
               ),

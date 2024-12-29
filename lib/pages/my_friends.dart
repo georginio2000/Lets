@@ -14,7 +14,6 @@ class MyFriendsPage extends StatelessWidget {
       return [];
     }
 
-    // Ανάκτηση της λίστας φίλων του χρήστη από το Firebase
     final DocumentSnapshot<Map<String, dynamic>> userDoc = await FirebaseFirestore.instance
         .collection('users')
         .doc(user.uid)
@@ -88,7 +87,7 @@ class MyFriendsPage extends StatelessWidget {
                     return Padding(
                       padding: const EdgeInsets.symmetric(
                         vertical: 8.0,
-                        horizontal: 20.0, // Εδώ προσθέτουμε horizontal padding
+                        horizontal: 20.0,
                       ),
                       child: AddFriendWidget(
                         username: username,
