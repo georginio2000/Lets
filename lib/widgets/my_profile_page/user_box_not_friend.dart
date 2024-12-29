@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart'; // Χρειάζεται για τα SVG αρχεία
+import 'package:flutter_svg/flutter_svg.dart';
 
 class AddFriendWidget extends StatelessWidget {
   final String username;
@@ -17,9 +17,9 @@ class AddFriendWidget extends StatelessWidget {
       width: MediaQuery.of(context).size.width,
       height: 50,
       decoration: BoxDecoration(
-        color: Colors.white, // Χρώμα του φόντου
-        borderRadius: BorderRadius.circular(0), // Στρογγυλεμένες γωνίες
-        border: Border.all(color: Colors.black, width: 1.0), // Πλαίσιο
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(0),
+        border: Border.all(color: Colors.black, width: 1.0),
         boxShadow: [
           BoxShadow(
             color: Colors.grey.withOpacity(1),
@@ -32,8 +32,8 @@ class AddFriendWidget extends StatelessWidget {
         children: [
           // Εικόνα προφίλ
           Positioned(
-            left: 10, // Απόσταση από τα αριστερά
-            top: 10, // Απόσταση από πάνω
+            left: 10,
+            top: 10,
             child: SvgPicture.asset(
               'assets/EXTRA_SMALL_PROFILE.svg',
               width: 30,
@@ -42,8 +42,8 @@ class AddFriendWidget extends StatelessWidget {
           ),
           // Όνομα χρήστη
           Positioned(
-            left: 50, // Απόσταση από τα αριστερά
-            top: 14, // Απόσταση από πάνω
+            left: 50,
+            top: 14,
             child: Text(
               username,
               style: const TextStyle(
@@ -53,15 +53,14 @@ class AddFriendWidget extends StatelessWidget {
               ),
             ),
           ),
-          // Εικονίδιο προσθήκης φίλου
           Positioned(
-            right: 10, // Απόσταση από τα δεξιά
-            top: 3, // Απόσταση από πάνω
+            right: 10,
+            top: 3,
             child: IconButton(
               icon: SvgPicture.asset(
                 'assets/ADD_FRIEND_ICON.svg',
-                width: 35, // Αυξημένο πλάτος
-                height: 35, // Αυξημένο ύψος
+                width: 35,
+                height: 35,
               ),
               onPressed: onAddFriendPressed,
             ),

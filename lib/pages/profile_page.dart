@@ -7,6 +7,8 @@ import '../widgets/my_profile_page/numbers_of_friends_activities.dart';
 import '../widgets/my_profile_page/bio_box.dart';
 import '../widgets/my_profile_page/past_activities_line.dart';
 import '../widgets/my_profile_page/add_friend.dart';
+
+
 class ProfilePage extends StatefulWidget {
   const ProfilePage({super.key});
 

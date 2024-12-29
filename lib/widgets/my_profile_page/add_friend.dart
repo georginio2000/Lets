@@ -125,7 +125,7 @@ class _AddFriendPopupState extends State<AddFriendPopup> {
   Widget build(BuildContext context) {
     return Dialog(
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(0)),
-      backgroundColor: const Color(0xFF9CC4C4), // Set background color here
+      backgroundColor: const Color(0xFF9CC4C4),
       child: SizedBox(
         width: MediaQuery.of(context).size.width * 0.8,
         child: Padding(
@@ -136,7 +136,7 @@ class _AddFriendPopupState extends State<AddFriendPopup> {
               // Add Friends Title
               const Center(
                 child: Padding(
-                  padding: EdgeInsets.only(bottom: 14.0), // Add spacing below the title
+                  padding: EdgeInsets.only(bottom: 14.0),
                   child: Text(
                     'ADD FRIENDS',
                     style: TextStyle(

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:project/pages/my_friends.dart';// Import της σελίδας MyFriendsPage
+import 'package:project/pages/my_friends.dart';
 
 class FriendsActivitiesWidget extends StatelessWidget {
   const FriendsActivitiesWidget({super.key});
@@ -84,7 +84,7 @@ class FriendsActivitiesWidget extends StatelessWidget {
   Widget _buildStatisticBox(String label, String value) {
     return Column(
       mainAxisSize: MainAxisSize.min,
-      crossAxisAlignment: CrossAxisAlignment.center, // Center align the text horizontally
+      crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         Text(
           label,
@@ -102,7 +102,7 @@ class FriendsActivitiesWidget extends StatelessWidget {
             fontWeight: FontWeight.bold,
             color: Colors.black,
           ),
-          textAlign: TextAlign.center, // Ensures the number is centered
+          textAlign: TextAlign.center,
         ),
       ],
     );

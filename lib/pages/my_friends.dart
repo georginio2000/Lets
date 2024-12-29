@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import '../widgets/my_profile_page/add_friend_button.dart'; // Import για το Add Friend κουμπί
-import '../widgets/my_profile_page/add_friend.dart'; // Import για το Add Friend popup
-import '../widgets/my_friends/user_box_friend.dart'; // Import για το AddFriendWidget
+import '../widgets/my_profile_page/add_friend_button.dart';
+import '../widgets/my_profile_page/add_friend.dart';
+import '../widgets/my_friends/user_box_friend.dart';
 
 class MyFriendsPage extends StatelessWidget {
   const MyFriendsPage({super.key});
@@ -45,7 +45,7 @@ class MyFriendsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFF9CC4C4), // Χρώμα φόντου
+      backgroundColor: const Color(0xFF9CC4C4),
       body: Stack(
         children: [
           // Scrollable περιοχή
@@ -79,7 +79,7 @@ class MyFriendsPage extends StatelessWidget {
               }
 
               return Padding(
-                padding: const EdgeInsets.only(top: 70), // Για να αφήσουμε χώρο για τα κουμπιά
+                padding: const EdgeInsets.only(top: 70),
                 child: ListView.builder(
                   itemCount: friends.length,
                   itemBuilder: (context, index) {
@@ -92,7 +92,7 @@ class MyFriendsPage extends StatelessWidget {
                       ),
                       child: AddFriendWidget(
                         username: username,
-                        onAddFriendPressed: () {}, // Δεν χρησιμοποιείται εδώ
+                        onAddFriendPressed: () {},
                       ),
                     );
                   },
@@ -115,7 +115,7 @@ class MyFriendsPage extends StatelessWidget {
                 color: Colors.black,
                 iconSize: 24,
                 onPressed: () {
-                  Navigator.pop(context); // Επιστροφή στην προηγούμενη σελίδα
+                  Navigator.pop(context);
                 },
               ),
             ),
