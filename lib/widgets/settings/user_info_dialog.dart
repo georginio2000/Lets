@@ -63,13 +63,6 @@ class ViewYourInfoDialog extends StatelessWidget {
                   mainAxisSize: MainAxisSize.min,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Align(
-                      alignment: Alignment.topRight,
-                      child: GestureDetector(
-                        onTap: () => Navigator.of(context).pop(),
-                        child: const Icon(Icons.close, color: Colors.black),
-                      ),
-                    ),
                     //const SizedBox(height: 10),
                     InfoBox(
                       labelText: "Username",

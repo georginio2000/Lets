@@ -15,7 +15,7 @@ class AboutLetsDialog {
               padding: const EdgeInsets.all(20.0),
               decoration: BoxDecoration(
                 color: const Color(0xFF9CC4C4),
-                borderRadius: BorderRadius.circular(20),
+                borderRadius: BorderRadius.circular(0),
                 boxShadow: [
                   BoxShadow(
                     color: Colors.black.withOpacity(0.2),
@@ -39,13 +39,6 @@ class AboutLetsDialog {
                           fontWeight: FontWeight.bold,
                           color: Colors.black,
                         ),
-                      ),
-
-                      IconButton(
-                        icon: const Icon(Icons.close, color: Colors.black),
-                        onPressed: () {
-                          Navigator.of(context).pop();
-                        },
                       ),
                     ],
                   ),

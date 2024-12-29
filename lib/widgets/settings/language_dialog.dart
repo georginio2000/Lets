@@ -49,22 +49,6 @@ class LanguageDialog {
                     ),
                   ),
                 ),
-                // Το κουμπί X
-                Positioned(
-                  top: 306,
-                  right: 3,
-                  child: GestureDetector(
-                    onTap: () {
-                      Navigator.of(context).pop();
-                    },
-                      child: const Icon(
-                        Icons.close,
-                        color: Colors.black,
-                        size: 25,
-                      ),
-
-                  ),
-                ),
               ],
             ),
           ),

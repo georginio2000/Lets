@@ -9,7 +9,7 @@ class FeedbackSupportDialog {
       builder: (BuildContext context) {
         return Dialog(
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(10),
+            borderRadius: BorderRadius.circular(0),
           ),
           child: LayoutBuilder(
             builder: (context, constraints) {
@@ -19,7 +19,7 @@ class FeedbackSupportDialog {
                     padding: const EdgeInsets.all(20),
                     decoration: BoxDecoration(
                       color: const Color(0xFF9CC4C4),
-                      borderRadius: BorderRadius.circular(10),
+                      borderRadius: BorderRadius.circular(0),
                     ),
                     constraints: const BoxConstraints(
                       minWidth: 367,
@@ -40,12 +40,6 @@ class FeedbackSupportDialog {
                                 fontWeight: FontWeight.bold,
                                 color: Colors.black,
                               ),
-                            ),
-                            GestureDetector(
-                              onTap: () {
-                                Navigator.of(context).pop();
-                              },
-                              child: const Icon(Icons.close, color: Colors.black),
                             ),
                           ],
                         ),

@@ -14,30 +14,19 @@ class FAQDialog {
                 width: 367,
                 decoration: BoxDecoration(
                   color: const Color(0xFF9CC4C4),
-                  borderRadius: BorderRadius.circular(10),
+                  borderRadius: BorderRadius.circular(0),
                 ),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        const Text(
-                          "FREQUENTLY ASKED QUESTIONS",
-                          style: TextStyle(
-                            fontSize: 16,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.black,
-                          ),
-                        ),
-                        GestureDetector(
-                          onTap: () {
-                            Navigator.of(context).pop();
-                          },
-                          child: const Icon(Icons.close, color: Colors.black),
-                        ),
-                      ],
+                    const Text(
+                      "FREQUENTLY ASKED QUESTIONS",
+                      style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.black,
+                      ),
                     ),
                     const SizedBox(height: 20),
                     const FAQItem(
