@@ -59,7 +59,7 @@ class ChangePasswordDialog {
                 ),
                 constraints: const BoxConstraints(
                   minWidth: 367,
-                  maxHeight: 350, // max megethos gia overflow
+                  maxHeight: 350,
                 ),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,

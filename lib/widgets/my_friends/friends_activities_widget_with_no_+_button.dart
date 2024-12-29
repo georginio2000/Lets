@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class FriendsActivitiesWidgetNoButton extends StatelessWidget {
-  final String uid; // Το UID του χρήστη που περνάμε ως παράμετρο
-  final double spacing; // Απόσταση μεταξύ των στατιστικών
+  final String uid;
+  final double spacing;
 
   const FriendsActivitiesWidgetNoButton({super.key, required this.uid, this.spacing = 40});
 
@@ -46,7 +46,7 @@ class FriendsActivitiesWidgetNoButton extends StatelessWidget {
             return _buildStatisticBox('ACTIVITIES', snapshot.data.toString());
           },
         ),
-        SizedBox(width: 130), // Ελέγχει την απόσταση ανάμεσα στα στατιστικά
+        SizedBox(width: 130),
         // Friends Section
         FutureBuilder<int>(
           future: _getFriendsCount(),

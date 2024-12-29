@@ -19,7 +19,6 @@ class ChangeUsernameDialog {
       try {
         User? user = auth.currentUser;
         if (user != null) {
-          // Ενημέρωση του username στο Firestore
           await firestore.collection('users').doc(user.uid).update({
             'username': newUsernameController.text.trim(),
           });

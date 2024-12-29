@@ -4,13 +4,13 @@ import 'package:project/pages/profile_page_user.dart';
 
 class AddFriendWidget extends StatelessWidget {
   final String username;
-  final String uid; // Το UID του χρήστη
+  final String uid;
   final VoidCallback onAddFriendPressed;
 
   const AddFriendWidget({
     super.key,
     required this.username,
-    required this.uid, // Προσθέτουμε το UID ως παράμετρο
+    required this.uid,
     required this.onAddFriendPressed,
   });
 
@@ -27,13 +27,12 @@ class AddFriendWidget extends StatelessWidget {
           BoxShadow(
             color: Colors.grey.withOpacity(1),
             blurRadius: 5,
-            offset: const Offset(2, 4), // Σκιά
+            offset: const Offset(2, 4),
           ),
         ],
       ),
       child: Stack(
         children: [
-          // Εικόνα προφίλ
           Positioned(
             left: 10,
             top: 10,
@@ -42,7 +41,7 @@ class AddFriendWidget extends StatelessWidget {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => UserPage(uid: uid), // Περνάμε το UID
+                    builder: (context) => UserPage(uid: uid),
                   ),
                 );
               },
@@ -53,7 +52,6 @@ class AddFriendWidget extends StatelessWidget {
               ),
             ),
           ),
-          // Όνομα χρήστη
           Positioned(
             left: 50,
             top: 14,

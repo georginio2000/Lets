@@ -40,14 +40,14 @@ class ProfileWidget extends StatelessWidget {
               height: 120,
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
-                color: const Color(0xFFE0E0E0), // Light grey background
+                color: const Color(0xFFE0E0E0),
                 border: Border.all(color: Colors.black, width: 1.0),
               ),
               child: SvgPicture.asset(
-                'assets/profile_pic.svg', // Διαδρομή στο SVG icon στα assets
+                'assets/profile_pic.svg',
                 width: 80,
                 height: 80,
-                fit: BoxFit.contain, // Διασφαλίζει ότι το SVG χωράει σωστά
+                fit: BoxFit.contain,
               ),
             ),
             const SizedBox(height: 10),

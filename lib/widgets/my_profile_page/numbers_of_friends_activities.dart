@@ -38,7 +38,7 @@ class FriendsActivitiesWidget extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
-        // Activities Section
+
         FutureBuilder<int>(
           future: _getActivitiesCount(),
           builder: (context, snapshot) {
@@ -51,9 +51,9 @@ class FriendsActivitiesWidget extends StatelessWidget {
             return _buildStatisticBox('ACTIVITIES', snapshot.data.toString());
           },
         ),
-        // Add space between sections
+
         const SizedBox(width: 130),
-        // Friends Section
+
         GestureDetector(
           onTap: () {
             // Πλοήγηση στη σελίδα φίλων

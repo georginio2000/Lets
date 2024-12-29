@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'add_button.dart'; // Εισάγουμε το κουμπί που φτιάξαμε
+import 'add_button.dart';
 
 class FriendsActivitiesWidget extends StatelessWidget {
-  final String uid; // Το UID του χρήστη που περνάμε ως παράμετρο
-  final double spacing; // Απόσταση μεταξύ του κουμπιού και των στατιστικών
+  final String uid;
+  final double spacing;
 
   const FriendsActivitiesWidget({super.key, required this.uid, this.spacing = 20});
 
@@ -34,7 +34,6 @@ class FriendsActivitiesWidget extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        // Activities Section
         FutureBuilder<int>(
           future: _getActivitiesCount(),
           builder: (context, snapshot) {
@@ -47,15 +46,14 @@ class FriendsActivitiesWidget extends StatelessWidget {
             return _buildStatisticBox('ACTIVITIES', snapshot.data.toString());
           },
         ),
-        SizedBox(width: 40), // Ελέγχει την απόσταση από το Activities
+        SizedBox(width: 40),
         // Custom Button Section
         CustomButton(
           onPressed: () {
-            // Ενέργεια όταν πατηθεί το κουμπί
             print('Custom button pressed!');
           },
         ),
-        SizedBox(width: 40), // Ελέγχει την απόσταση από το Friends
+        SizedBox(width: 40),
         // Friends Section
         FutureBuilder<int>(
           future: _getFriendsCount(),

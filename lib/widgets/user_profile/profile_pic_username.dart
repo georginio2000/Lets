@@ -3,7 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class ProfileWidgetUser extends StatelessWidget {
-  final String uid; // Το UID του χρήστη που περνάμε ως παράμετρο
+  final String uid;
 
   const ProfileWidgetUser({super.key, required this.uid});
 
@@ -12,7 +12,7 @@ class ProfileWidgetUser extends StatelessWidget {
     await FirebaseFirestore.instance.collection('users').doc(uid).get();
 
     if (snapshot.exists) {
-      return snapshot.data() ?? {}; // Επιστρέφουμε τα δεδομένα του χρήστη
+      return snapshot.data() ?? {};
     }
     return {};
   }
@@ -46,7 +46,7 @@ class ProfileWidgetUser extends StatelessWidget {
               height: 120,
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
-                color: const Color(0xFFE0E0E0), // Light grey background
+                color: const Color(0xFFE0E0E0),
                 border: Border.all(color: Colors.black, width: 1.0),
               ),
               child: profilePicUrl.isNotEmpty
