@@ -29,7 +29,7 @@ class AddFriendButton extends StatelessWidget {
       ),
       child: IconButton(
         icon: SvgPicture.asset(
-          'assets/add_friend_icon.svg', // Path to the SVG icon
+          'assets/add_friend_iconn.svg', // Path to the SVG icon
           fit: BoxFit.contain,
           width: 24,
           height: 24,

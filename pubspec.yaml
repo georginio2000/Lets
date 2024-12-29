@@ -70,7 +70,9 @@ flutter:
     - assets/PROFILE_ICON.svg
     - assets/settings_icon.svg
     - assets/profile_pic.svg
-    - assets/add_friend_icon.svg
+    - assets/add_friend_iconn.svg
+    - assets/ADD_FRIEND_ICON.svg
+    - assets/SEARCH_ICON.svg
   # To add assets to your application, add an assets section, like this:
   # assets:
   #   - images/a_dot_burr.jpeg

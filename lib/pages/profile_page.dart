@@ -6,7 +6,7 @@ import '../widgets/my_profile_page/profile_pic_username.dart';
 import '../widgets/my_profile_page/numbers_of_friends_activities.dart';
 import '../widgets/my_profile_page/bio_box.dart';
 import '../widgets/my_profile_page/past_activities_line.dart';
-
+import '../widgets/my_profile_page/add_friend.dart';
 class ProfilePage extends StatefulWidget {
   const ProfilePage({super.key});
 
@@ -23,10 +23,8 @@ class _ProfilePageState extends State<ProfilePage> {
     _refreshFuture = _refreshData();
   }
 
-  // Συνάρτηση για την ανάκτηση δεδομένων
   Future<void> _refreshData() async {
     setState(() {
-      // Κάνουμε refresh αναγκάζοντας τα FutureBuilder να ξαναφορτώσουν δεδομένα
       _refreshFuture = Future.delayed(Duration.zero);
     });
   }
@@ -36,7 +34,7 @@ class _ProfilePageState extends State<ProfilePage> {
     return Scaffold(
       backgroundColor: const Color(0xFF9CC4C4),
       body: RefreshIndicator(
-        onRefresh: _refreshData, // Συνδέουμε τη λειτουργία refresh
+        onRefresh: _refreshData,
         child: FutureBuilder<void>(
           future: _refreshFuture,
           builder: (context, snapshot) {
@@ -70,7 +68,12 @@ class _ProfilePageState extends State<ProfilePage> {
                       top: 30,
                       left: 20,
                       child: AddFriendButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          showDialog(
+                            context: context,
+                            builder: (context) => const AddFriendPopup(),
+                          );
+                        },
                       ),
                     ),
                     // Profile Picture and Username
