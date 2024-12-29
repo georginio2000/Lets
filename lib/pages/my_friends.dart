@@ -34,6 +34,7 @@ class MyFriendsPage extends StatelessWidget {
       if (friendDoc.exists) {
         friends.add({
           'username': friendDoc.data()?['username'] ?? 'Unknown',
+          'uid': friendId, // Προσθήκη του UID για κάθε φίλο
         });
       }
     }
@@ -83,6 +84,7 @@ class MyFriendsPage extends StatelessWidget {
                   itemCount: friends.length,
                   itemBuilder: (context, index) {
                     final String username = friends[index]['username'];
+                    final String uid = friends[index]['uid']; // Λήψη του UID
 
                     return Padding(
                       padding: const EdgeInsets.symmetric(
@@ -91,6 +93,7 @@ class MyFriendsPage extends StatelessWidget {
                       ),
                       child: AddFriendWidget(
                         username: username,
+                        uid: uid, // Περνάμε το UID στο widget
                         onAddFriendPressed: () {},
                       ),
                     );
