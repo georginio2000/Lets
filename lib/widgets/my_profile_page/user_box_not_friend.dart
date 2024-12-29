@@ -35,7 +35,7 @@ class AddFriendWidget extends StatelessWidget {
             left: 10, // Απόσταση από τα αριστερά
             top: 10, // Απόσταση από πάνω
             child: SvgPicture.asset(
-              'assets/profile_pic.svg',
+              'assets/EXTRA_SMALL_PROFILE.svg',
               width: 30,
               height: 30,
             ),
