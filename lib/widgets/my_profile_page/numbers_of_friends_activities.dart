@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:project/pages/my_friends.dart';// Import της σελίδας MyFriendsPage
 
 class FriendsActivitiesWidget extends StatelessWidget {
   const FriendsActivitiesWidget({super.key});
@@ -53,17 +54,28 @@ class FriendsActivitiesWidget extends StatelessWidget {
         // Add space between sections
         const SizedBox(width: 130),
         // Friends Section
-        FutureBuilder<int>(
-          future: _getFriendsCount(),
-          builder: (context, snapshot) {
-            if (snapshot.connectionState == ConnectionState.waiting) {
-              return _buildStatisticBox('FRIENDS', '...');
-            }
-            if (snapshot.hasError) {
-              return _buildStatisticBox('FRIENDS', 'Error');
-            }
-            return _buildStatisticBox('FRIENDS', snapshot.data.toString());
+        GestureDetector(
+          onTap: () {
+            // Πλοήγηση στη σελίδα φίλων
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => const MyFriendsPage(),
+              ),
+            );
           },
+          child: FutureBuilder<int>(
+            future: _getFriendsCount(),
+            builder: (context, snapshot) {
+              if (snapshot.connectionState == ConnectionState.waiting) {
+                return _buildStatisticBox('FRIENDS', '...');
+              }
+              if (snapshot.hasError) {
+                return _buildStatisticBox('FRIENDS', 'Error');
+              }
+              return _buildStatisticBox('FRIENDS', snapshot.data.toString());
+            },
+          ),
         ),
       ],
     );
