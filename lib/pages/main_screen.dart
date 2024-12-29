@@ -18,10 +18,24 @@ class _MainScreenState extends State<MainScreen> {
   final List<Widget> _pages = [
     HomePage(),
     FriendsPage(),
-    AddPage(),
+    Placeholder(), // Placeholder for AddPage to navigate separately
     MapPage(),
     ProfilePage(),
   ];
+
+  void _navigateToAddPage(BuildContext context) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => AddPage(),
+      ),
+    ).then((_) {
+      // Optional: Perform any action when returning from AddPage, if needed
+      setState(() {
+        _selectedIndex = 0; // Return to the HomePage by default
+      });
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -33,9 +47,14 @@ class _MainScreenState extends State<MainScreen> {
       bottomNavigationBar: CustomNavigationBar(
         selectedIndex: _selectedIndex, // Current selected index
         onIconTapped: (index) {
-          setState(() {
-            _selectedIndex = index; // Update selected index
-          });
+          if (index == 2) {
+            // Navigate to AddPage
+            _navigateToAddPage(context);
+          } else {
+            setState(() {
+              _selectedIndex = index; // Update selected index
+            });
+          }
         },
       ),
     );

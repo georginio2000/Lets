@@ -51,8 +51,10 @@ class ActivityFeed extends StatelessWidget {
 
       // Apply tag filter (categoryFilter) if provided
       if (categoryFilter != null && categoryFilter!.isNotEmpty) {
+
         List<String> tags = categoryFilter!.split(', '); // Split the tags into a list
-        query = query.where('tags', arrayContainsAny: tags);
+        query = query.where('tags', arrayContainsAny: tags); // Filter by tags
+        print('Tags for filtering in ActivityFeed: $tags');
       }
 
       // Apply max participants filter if provided

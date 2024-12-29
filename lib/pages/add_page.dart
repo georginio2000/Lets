@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import '../widgets/all_Lets/lets_add.dart';
 import '../widgets/register/register_join_submit_create_button.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -12,23 +13,87 @@ class _AddPageState extends State<AddPage> {
   final TextEditingController titleController = TextEditingController();
   final TextEditingController descriptionController = TextEditingController();
   final TextEditingController numParticipantsController = TextEditingController();
-  final List<String> tags = ['Example', 'Music', 'Sports', 'Art', 'Travel', 'Food'];
+  List<String> tags = []; // Tags fetched from Firestore
   final List<String> selectedTags = [];
 
   String? visibility;
   String? skillLevel;
   DateTime? selectedDateTime;
   String? location;
+  List<String> joinedparticipants = [];
+  bool isLoadingTags = true; // To show loading while fetching tags
 
-  void _submitActivity() {
-    print('Title: ${titleController.text}');
-    print('Visibility: $visibility');
-    print('Skill Level: $skillLevel');
-    print('Date & Time: $selectedDateTime');
-    print('Location: $location');
-    print('Number of Participants: ${numParticipantsController.text}');
-    print('Description: ${descriptionController.text}');
-    print('Tags: $selectedTags');
+  @override
+  void initState() {
+    super.initState();
+    _fetchTagsFromFirestore();
+  }
+
+  Future<void> _fetchTagsFromFirestore() async {
+    try {
+      setState(() {
+        isLoadingTags = true;
+      });
+      QuerySnapshot snapshot =
+      await FirebaseFirestore.instance.collection('tags').get();
+      final fetchedTags = snapshot.docs.map((doc) => doc['tag'] as String).toList();
+      setState(() {
+        tags = fetchedTags;
+        isLoadingTags = false;
+      });
+    } catch (e) {
+      print("Error fetching tags: $e");
+      setState(() {
+        isLoadingTags = false;
+      });
+    }
+  }
+
+  void _submitActivity() async {
+    try {
+      if (titleController.text.isEmpty ||
+          visibility == null ||
+          skillLevel == null ||
+          selectedDateTime == null) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text("Please fill out all required fields."),
+          ),
+        );
+        return;
+      }
+
+      // Create new activity document in Firestore
+      await FirebaseFirestore.instance.collection('activities').add({
+        'title': titleController.text,
+        'visibility': visibility,
+        'skillLevel': skillLevel,
+        'dateTime': selectedDateTime?.toIso8601String(),
+        'location': location,
+        'joinedParticipants': [],
+        'numParticipants': int.tryParse(numParticipantsController.text),
+        'description': descriptionController.text,
+        'tags': selectedTags,
+        'createdBy': FirebaseFirestore.instance.app.options.projectId, // Replace with user ID
+        'createdAt': DateTime.now().toIso8601String(),
+      });
+
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text("Activity created successfully!"),
+        ),
+      );
+
+      // Navigate back
+      Navigator.pop(context);
+    } catch (e) {
+      print("Error creating activity: $e");
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text("Failed to create activity."),
+        ),
+      );
+    }
   }
 
   Future<void> _selectDateTime() async {
@@ -61,7 +126,7 @@ class _AddPageState extends State<AddPage> {
     return Container(
       decoration: BoxDecoration(
         color: const Color(0xFFE5E1DA),
-        border: Border.all(color: Colors.black, width: 1), // Add black border
+        border: Border.all(color: Colors.black, width: 1),
         borderRadius: BorderRadius.circular(2),
         boxShadow: [
           BoxShadow(
@@ -76,13 +141,12 @@ class _AddPageState extends State<AddPage> {
     );
   }
 
-
   Widget _styledRoundContainer({required Widget child}) {
     return Container(
-      height:40,
+      height: 40,
       decoration: BoxDecoration(
         color: const Color(0xFFE5E1DA),
-        border: Border.all(color: Colors.black, width: 1), // Add black border
+        border: Border.all(color: Colors.black, width: 1),
         borderRadius: BorderRadius.circular(25),
         boxShadow: [
           BoxShadow(
@@ -103,7 +167,7 @@ class _AddPageState extends State<AddPage> {
       decoration: BoxDecoration(
         color: const Color(0xFF468585),
         borderRadius: BorderRadius.circular(12),
-        border: Border.all(color: Colors.black, width: 1), // Add black border
+        border: Border.all(color: Colors.black, width: 1),
       ),
       padding: const EdgeInsets.symmetric(horizontal: 8),
       child: Row(
@@ -220,7 +284,7 @@ class _AddPageState extends State<AddPage> {
                     child: _styledRoundContainer(
                       child: ElevatedButton.icon(
                         onPressed: _selectDateTime,
-                        icon: const Icon(Icons.access_time,color: Colors.black),
+                        icon: const Icon(Icons.access_time, color: Colors.black),
                         label: Text(selectedDateTime == null
                             ? "TIME/DATE"
                             : "${selectedDateTime!.toLocal()}".split(' ')[0]),
@@ -242,9 +306,9 @@ class _AddPageState extends State<AddPage> {
                           });
                         },
                         icon: SvgPicture.asset(
-                          'assets/SMALL_MAP_ICON.svg', // Path to your SVG file
-                          height: 15, // Set the height
-                          color: Colors.black, // Set the color (if applicable)
+                          'assets/SMALL_MAP_ICON.svg',
+                          height: 15,
+                          color: Colors.black,
                         ),
                         label: const Text("LOCATION"),
                         style: ElevatedButton.styleFrom(
@@ -255,7 +319,6 @@ class _AddPageState extends State<AddPage> {
                       ),
                     ),
                   ),
-
                 ],
               ),
               const SizedBox(height: 20),
@@ -286,18 +349,18 @@ class _AddPageState extends State<AddPage> {
                   ),
                   const SizedBox(width: 50),
                   Container(
-                    height: 50, // Height for the container
-                    width: 60, // Fixed width for the container
+                    height: 50,
+                    width: 60,
                     decoration: BoxDecoration(
                       color: const Color(0xFFE5E1DA),
                       border: Border.all(color: Colors.black, width: 1),
-                      borderRadius: BorderRadius.circular(2), // Rounded corners
+                      borderRadius: BorderRadius.circular(2),
                       boxShadow: [
                         BoxShadow(
                           color: Colors.grey.withOpacity(0.5),
                           spreadRadius: 2,
                           blurRadius: 5,
-                          offset: const Offset(0, 2), // Shadow position
+                          offset: const Offset(0, 2),
                         ),
                       ],
                     ),
@@ -308,7 +371,7 @@ class _AddPageState extends State<AddPage> {
                       keyboardType: TextInputType.number,
                       decoration: const InputDecoration(
                         border: InputBorder.none,
-                        hintText: "-", // Placeholder for the field
+                        hintText: "-",
                         hintStyle: TextStyle(
                           fontSize: 18,
                           fontWeight: FontWeight.bold,
@@ -324,7 +387,6 @@ class _AddPageState extends State<AddPage> {
                   ),
                 ],
               ),
-
               const SizedBox(height: 20),
               _styledContainer(
                 child: TextField(
@@ -340,7 +402,9 @@ class _AddPageState extends State<AddPage> {
                 ),
               ),
               const SizedBox(height: 20),
-              _styledContainer(
+              isLoadingTags
+                  ? const Center(child: CircularProgressIndicator())
+                  : _styledContainer(
                 child: DropdownButtonFormField<String>(
                   hint: const Text("CHOOSE TAGS"),
                   items: tags
