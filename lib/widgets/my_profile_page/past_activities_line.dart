@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class PastActivities extends StatelessWidget {
-  const PastActivities({Key? key}) : super(key: key);
+  const PastActivities({super.key});
 
   @override
   Widget build(BuildContext context) {

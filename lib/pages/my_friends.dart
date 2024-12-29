@@ -25,7 +25,6 @@ class MyFriendsPage extends StatelessWidget {
       return [];
     }
 
-    // Ανάκτηση πληροφοριών για κάθε φίλο
     final List<Map<String, dynamic>> friends = [];
     for (String friendId in friendsIds) {
       final DocumentSnapshot<Map<String, dynamic>> friendDoc =
@@ -34,7 +33,7 @@ class MyFriendsPage extends StatelessWidget {
       if (friendDoc.exists) {
         friends.add({
           'username': friendDoc.data()?['username'] ?? 'Unknown',
-          'uid': friendId, // Προσθήκη του UID για κάθε φίλο
+          'uid': friendId,
         });
       }
     }
@@ -48,7 +47,6 @@ class MyFriendsPage extends StatelessWidget {
       backgroundColor: const Color(0xFF9CC4C4),
       body: Stack(
         children: [
-          // Scrollable περιοχή
           FutureBuilder<List<Map<String, dynamic>>>(
             future: _fetchFriends(),
             builder: (context, snapshot) {
@@ -84,7 +82,7 @@ class MyFriendsPage extends StatelessWidget {
                   itemCount: friends.length,
                   itemBuilder: (context, index) {
                     final String username = friends[index]['username'];
-                    final String uid = friends[index]['uid']; // Λήψη του UID
+                    final String uid = friends[index]['uid'];
 
                     return Padding(
                       padding: const EdgeInsets.symmetric(
@@ -93,7 +91,7 @@ class MyFriendsPage extends StatelessWidget {
                       ),
                       child: AddFriendWidget(
                         username: username,
-                        uid: uid, // Περνάμε το UID στο widget
+                        uid: uid,
                         onAddFriendPressed: () {},
                       ),
                     );

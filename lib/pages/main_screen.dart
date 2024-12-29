@@ -22,7 +22,7 @@ class _MainScreenState extends State<MainScreen> {
     const FriendsPage(),
     const AddPage(),
     const MapPage(),
-    ProfilePage(),
+    const ProfilePage(),
   ];
 
   @override

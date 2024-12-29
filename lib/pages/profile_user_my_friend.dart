@@ -6,7 +6,7 @@ import '../widgets/my_friends/friends_activities_widget_with_no_+_button.dart';
 class UserPage extends StatelessWidget {
   final String uid;
 
-  const UserPage({Key? key, required this.uid}) : super(key: key);
+  const UserPage({super.key, required this.uid});
 
   @override
   Widget build(BuildContext context) {

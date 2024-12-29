@@ -4,7 +4,7 @@ import 'package:project/pages/profile_user_my_friend.dart';
 
 class AddFriendWidget extends StatelessWidget {
   final String username;
-  final String uid; // Το UID του χρήστη
+  final String uid;
   final VoidCallback onAddFriendPressed;
 
   const AddFriendWidget({
@@ -40,20 +40,19 @@ class AddFriendWidget extends StatelessWidget {
             ),
           ],
         ),
-        child: Stack(
+        child: Row(
           children: [
-            Positioned(
-              left: 10,
-              top: 10,
+            // Profile Picture
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 10.0),
               child: SvgPicture.asset(
                 'assets/EXTRA_SMALL_PROFILE.svg',
                 width: 30,
                 height: 30,
               ),
             ),
-            Positioned(
-              left: 50,
-              top: 14,
+            // Username
+            Expanded(
               child: Text(
                 username,
                 style: const TextStyle(

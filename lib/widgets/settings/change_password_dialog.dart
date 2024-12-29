@@ -65,10 +65,10 @@ class ChangePasswordDialog {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    Row(
+                    const Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        const Text(
+                        Text(
                           "CHANGE PASSWORD",
                           style: TextStyle(
                             fontSize: 16,

@@ -61,10 +61,10 @@ class ChangeUsernameDialog {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    Row(
+                    const Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        const Text(
+                        Text(
                           "CHANGE USERNAME",
                           style: TextStyle(
                             fontSize: 16,

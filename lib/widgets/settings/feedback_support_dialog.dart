@@ -30,10 +30,10 @@ class FeedbackSupportDialog {
                       mainAxisSize: MainAxisSize.min,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Row(
+                        const Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            const Text(
+                            Text(
                               "FEEDBACK AND SUPPORT",
                               style: TextStyle(
                                 fontSize: 16,

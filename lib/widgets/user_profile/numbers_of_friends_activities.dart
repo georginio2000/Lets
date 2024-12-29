@@ -46,14 +46,14 @@ class FriendsActivitiesWidget extends StatelessWidget {
             return _buildStatisticBox('ACTIVITIES', snapshot.data.toString());
           },
         ),
-        SizedBox(width: 40),
+        const SizedBox(width: 40),
         // Custom Button Section
         CustomButton(
           onPressed: () {
             print('Custom button pressed!');
           },
         ),
-        SizedBox(width: 40),
+        const SizedBox(width: 40),
         // Friends Section
         FutureBuilder<int>(
           future: _getFriendsCount(),

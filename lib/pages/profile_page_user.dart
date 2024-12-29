@@ -6,7 +6,7 @@ import '../widgets/my_profile_page/past_activities_line.dart';
 class UserPage extends StatelessWidget {
   final String uid;
 
-  const UserPage({Key? key, required this.uid}) : super(key: key);
+  const UserPage({super.key, required this.uid});
 
   @override
   Widget build(BuildContext context) {

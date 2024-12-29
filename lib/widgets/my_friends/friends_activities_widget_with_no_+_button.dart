@@ -46,7 +46,7 @@ class FriendsActivitiesWidgetNoButton extends StatelessWidget {
             return _buildStatisticBox('ACTIVITIES', snapshot.data.toString());
           },
         ),
-        SizedBox(width: 130),
+        const SizedBox(width: 130),
         // Friends Section
         FutureBuilder<int>(
           future: _getFriendsCount(),

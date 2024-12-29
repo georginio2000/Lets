@@ -25,14 +25,14 @@ class AboutLetsDialog {
                   ),
                 ],
               ),
-              child: Column(
+              child: const Column(
                 mainAxisSize: MainAxisSize.min,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      const Text(
+                      Text(
                         "ABOUT LET'S",
                         style: TextStyle(
                           fontSize: 20,
@@ -42,8 +42,8 @@ class AboutLetsDialog {
                       ),
                     ],
                   ),
-                  const SizedBox(height: 5),
-                  const Text(
+                  SizedBox(height: 5),
+                  Text(
                     "Let’s is the best app to connect people who want to share activities together. "
                         "Create and join activities such as sports, hiking, traveling, or anything else you enjoy doing. "
                         "Find like-minded individuals and start your journey together!",
