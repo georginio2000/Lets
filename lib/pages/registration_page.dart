@@ -100,7 +100,7 @@ class RegistrationPage extends StatelessWidget {
     }
 
     return Scaffold(
-      backgroundColor: const Color(0xFF9CC4C4), // background xrwma
+      backgroundColor: const Color(0xFF9CC4C4),
       body: Center(
         child: SingleChildScrollView(
           child: Padding(
@@ -175,7 +175,7 @@ class RegistrationPage extends StatelessWidget {
 
                 const SizedBox(height: 15),
                 Row(
-                    mainAxisAlignment: MainAxisAlignment.center, // Center the buttons horizontally
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children:[
                     AgeBox(
                       controller: ageController,
@@ -192,7 +192,7 @@ class RegistrationPage extends StatelessWidget {
                 const SizedBox(height: 45),
 
                 Row(
-                  mainAxisAlignment: MainAxisAlignment.center, // Center the buttons horizontally
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     RegisterJoinSubmitCreateButton(
                       labelText: "BACK",

@@ -11,33 +11,33 @@ class CustomButton extends StatelessWidget {
       width: 60,
       height: 60,
       decoration: BoxDecoration(
-        color: const Color(0xFF50B498), // Χρώμα φόντου του κουμπιού
-        borderRadius: BorderRadius.circular(0), // Ελαφρώς στρογγυλεμένες γωνίες
-        border: Border.all(color: Colors.black, width: 1.0), // Μαύρο περίγραμμα
+        color: const Color(0xFF50B498),
+        borderRadius: BorderRadius.circular(0),
+        border: Border.all(color: Colors.black, width: 1.0),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.3), // Ελαφριά σκιά
-            blurRadius: 4, // Απαλότητα της σκιάς
-            offset: const Offset(2, 4), // Θέση της σκιάς
+            color: Colors.black.withOpacity(0.3),
+            blurRadius: 4,
+            offset: const Offset(2, 4),
           ),
         ],
       ),
       child: Material(
-        color: Colors.transparent, // Διάφανο υλικό για κλικ
+        color: Colors.transparent,
         child: InkWell(
           borderRadius: BorderRadius.circular(0),
-          onTap: onPressed, // Ενέργεια όταν πατηθεί
+          onTap: onPressed,
           child: Center(
             child: Container(
               width: 40,
               height: 40,
               decoration: BoxDecoration(
-                shape: BoxShape.circle, // Κυκλικό εσωτερικό κουμπί
-                border: Border.all(color: Colors.black, width: 1.0), // Μαύρο περίγραμμα
+                shape: BoxShape.circle,
+                border: Border.all(color: Colors.black, width: 1.0),
               ),
               child: const Center(
                 child: Icon(
-                  Icons.add, // Σύμβολο +
+                  Icons.add,
                   color: Colors.black,
                   size: 28,
                 ),

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
 class InfoBox extends StatelessWidget {
-  final String labelText; // Το label πάνω από το TextField
-  final String initialValue; // Αρχική τιμή (actual value) που θα εμφανιστεί μέσα στο TextField
-  final TextEditingController controller; // Controller για διαχείριση τιμών
+  final String labelText;
+  final String initialValue;
+  final TextEditingController controller;
 
   const InfoBox({
     super.key,
@@ -14,7 +14,6 @@ class InfoBox extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // Ορίστε την αρχική τιμή του controller αν είναι άδειος
     controller.text = controller.text.isEmpty ? initialValue : controller.text;
 
     return Column(
@@ -23,7 +22,7 @@ class InfoBox extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.only(bottom: 1),
           child: Text(
-            labelText, // Εμφάνιση του label πάνω από το TextField
+            labelText,
             style: const TextStyle(
               fontSize: 11,
               color: Colors.black,
@@ -51,7 +50,7 @@ class InfoBox extends StatelessWidget {
             ],
           ),
           child: TextField(
-            controller: controller, // Χρησιμοποιείται για το TextField
+            controller: controller,
             decoration: const InputDecoration(
               border: InputBorder.none,
               contentPadding: EdgeInsets.all(10),

@@ -2,17 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class BioBoxUser extends StatelessWidget {
-  final String uid; // Το UID του χρήστη που περνάμε ως παράμετρο
+  final String uid;
 
   const BioBoxUser({super.key, required this.uid});
 
   Future<String> _fetchBio() async {
-    // Λήψη του bio από το Firebase για τον συγκεκριμένο χρήστη
     final doc = await FirebaseFirestore.instance.collection('users').doc(uid).get();
     if (doc.exists) {
       return doc.data()?['bio'] ?? 'No bio available';
     }
-    return 'No bio available'; // Default μήνυμα αν δεν υπάρχει bio
+    return 'No bio available';
   }
 
   @override
@@ -51,7 +50,7 @@ class BioBoxUser extends StatelessWidget {
               borderRadius: BorderRadius.circular(8),
             ),
             constraints: const BoxConstraints(
-              maxWidth: 300, // Μπορείς να το ρυθμίσεις ανάλογα
+              maxWidth: 300,
             ),
             child: Text(
               bio,

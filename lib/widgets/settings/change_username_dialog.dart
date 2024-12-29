@@ -19,7 +19,6 @@ class ChangeUsernameDialog {
       try {
         User? user = auth.currentUser;
         if (user != null) {
-          // Ενημέρωση του username στο Firestore
           await firestore.collection('users').doc(user.uid).update({
             'username': newUsernameController.text.trim(),
           });
@@ -44,7 +43,7 @@ class ChangeUsernameDialog {
       builder: (BuildContext context) {
         return Dialog(
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(10),
+            borderRadius: BorderRadius.circular(0),
           ),
           child: StatefulBuilder(
             builder: (context, setState) {
@@ -52,7 +51,7 @@ class ChangeUsernameDialog {
                 padding: const EdgeInsets.all(20),
                 decoration: BoxDecoration(
                   color: const Color(0xFF9CC4C4),
-                  borderRadius: BorderRadius.circular(10),
+                  borderRadius: BorderRadius.circular(0),
                 ),
                 constraints: const BoxConstraints(
                   minWidth: 367,
@@ -62,22 +61,16 @@ class ChangeUsernameDialog {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    Row(
+                    const Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        const Text(
+                        Text(
                           "CHANGE USERNAME",
                           style: TextStyle(
                             fontSize: 16,
                             fontWeight: FontWeight.bold,
                             color: Colors.black,
                           ),
-                        ),
-                        GestureDetector(
-                          onTap: () {
-                            Navigator.of(context).pop();
-                          },
-                          child: const Icon(Icons.close, color: Colors.black),
                         ),
                       ],
                     ),
@@ -94,7 +87,7 @@ class ChangeUsernameDialog {
                         fillColor: Colors.white,
                         hintText: "New Username",
                         border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(10),
+                          borderRadius: BorderRadius.circular(0),
                         ),
                       ),
                     ),
@@ -106,7 +99,7 @@ class ChangeUsernameDialog {
                         style: ElevatedButton.styleFrom(
                           backgroundColor: const Color(0xFF50B498),
                           shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(10),
+                            borderRadius: BorderRadius.circular(0),
                           ),
                         ),
                         child: const Text(

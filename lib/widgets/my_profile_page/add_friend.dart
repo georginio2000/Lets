@@ -30,7 +30,6 @@ class _AddFriendPopupState extends State<AddFriendPopup> {
     try {
       final String currentUserUid = FirebaseAuth.instance.currentUser!.uid;
 
-      // Get the current user's document
       final DocumentSnapshot currentUserDoc = await FirebaseFirestore.instance
           .collection('users')
           .doc(currentUserUid)
@@ -42,7 +41,6 @@ class _AddFriendPopupState extends State<AddFriendPopup> {
 
       final List<dynamic> friends = currentUserData?['friends'] ?? [];
 
-      // Fetch users that are not in the friends list and not the current user
       final QuerySnapshot snapshot = await FirebaseFirestore.instance
           .collection('users')
           .where(FieldPath.documentId, whereNotIn: [...friends, currentUserUid])
@@ -93,7 +91,6 @@ class _AddFriendPopupState extends State<AddFriendPopup> {
 
       final List<dynamic> friends = currentUserData?['friends'] ?? [];
 
-      // Search users that match the username and are not friends
       final QuerySnapshot snapshot = await FirebaseFirestore.instance
           .collection('users')
           .where('username', isEqualTo: searchText)
@@ -166,7 +163,7 @@ class _AddFriendPopupState extends State<AddFriendPopup> {
                       padding: const EdgeInsets.symmetric(vertical: 8.0),
                       child: AddFriendWidget(
                         username: user['username'] ?? 'Unknown',
-                        uid: user['uid'], // Περνάμε το UID του χρήστη
+                        uid: user['uid'],
                         onAddFriendPressed: () {
                           _sendFriendRequest(user['uid']);
                         },

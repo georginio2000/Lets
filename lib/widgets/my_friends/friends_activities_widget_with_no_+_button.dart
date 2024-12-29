@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'add_button.dart';
 
-class FriendsActivitiesWidget extends StatelessWidget {
+class FriendsActivitiesWidgetNoButton extends StatelessWidget {
   final String uid;
   final double spacing;
 
-  const FriendsActivitiesWidget({super.key, required this.uid, this.spacing = 20});
+  const FriendsActivitiesWidgetNoButton({super.key, required this.uid, this.spacing = 40});
 
   Future<int> _getFriendsCount() async {
     final DocumentSnapshot<Map<String, dynamic>> snapshot =
@@ -34,6 +33,7 @@ class FriendsActivitiesWidget extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
+        // Activities Section
         FutureBuilder<int>(
           future: _getActivitiesCount(),
           builder: (context, snapshot) {
@@ -46,14 +46,7 @@ class FriendsActivitiesWidget extends StatelessWidget {
             return _buildStatisticBox('ACTIVITIES', snapshot.data.toString());
           },
         ),
-        const SizedBox(width: 40),
-        // Custom Button Section
-        CustomButton(
-          onPressed: () {
-            print('Custom button pressed!');
-          },
-        ),
-        const SizedBox(width: 40),
+        const SizedBox(width: 130),
         // Friends Section
         FutureBuilder<int>(
           future: _getFriendsCount(),

@@ -6,7 +6,6 @@ class BioBox extends StatelessWidget {
   const BioBox({super.key});
 
   Future<String> _fetchBio() async {
-    // Λήψη του αποθηκευμένου bio από το Firebase
     final User? user = FirebaseAuth.instance.currentUser;
     if (user != null) {
       final doc = await FirebaseFirestore.instance.collection('users').doc(user.uid).get();
@@ -14,7 +13,7 @@ class BioBox extends StatelessWidget {
         return doc.data()?['bio'] ?? 'No bio available';
       }
     }
-    return 'No bio available'; // Default μήνυμα αν δεν υπάρχει bio
+    return 'No bio available';
   }
 
   @override
@@ -53,7 +52,7 @@ class BioBox extends StatelessWidget {
               borderRadius: BorderRadius.circular(8),
             ),
             constraints: const BoxConstraints(
-              maxWidth: 300, // Μπορείς να το ρυθμίσεις ανάλογα
+              maxWidth: 300,
             ),
             child: Text(
               bio,

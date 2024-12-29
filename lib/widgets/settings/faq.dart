@@ -14,53 +14,42 @@ class FAQDialog {
                 width: 367,
                 decoration: BoxDecoration(
                   color: const Color(0xFF9CC4C4),
-                  borderRadius: BorderRadius.circular(10),
+                  borderRadius: BorderRadius.circular(0),
                 ),
-                child: Column(
+                child: const Column(
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        const Text(
-                          "FREQUENTLY ASKED QUESTIONS",
-                          style: TextStyle(
-                            fontSize: 16,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.black,
-                          ),
-                        ),
-                        GestureDetector(
-                          onTap: () {
-                            Navigator.of(context).pop();
-                          },
-                          child: const Icon(Icons.close, color: Colors.black),
-                        ),
-                      ],
+                    Text(
+                      "FREQUENTLY ASKED QUESTIONS",
+                      style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.black,
+                      ),
                     ),
-                    const SizedBox(height: 20),
-                    const FAQItem(
+                    SizedBox(height: 20),
+                    FAQItem(
                       question: "1. Τι είναι το LET'S;",
                       answer: "Το LET'S είναι μια εφαρμογή για την οργάνωση και την ανακάλυψη δραστηριοτήτων με άλλους χρήστες.",
                     ),
-                    const SizedBox(height: 10),
-                    const FAQItem(
+                    SizedBox(height: 10),
+                    FAQItem(
                       question: "2. Πώς μπορώ να δημιουργήσω ένα activity;",
                       answer: "Μπορείς να πατήσεις το κουμπί 'Create Activity' στη σελίδα δραστηριοτήτων και να συμπληρώσεις τις πληροφορίες.",
                     ),
-                    const SizedBox(height: 10),
-                    const FAQItem(
+                    SizedBox(height: 10),
+                    FAQItem(
                       question: "3. Πώς μπορώ να δω τις δραστηριότητες μου;",
                       answer: "Στη σελίδα 'My Activities', θα δεις όλες τις δραστηριότητες που έχεις δημιουργήσει ή συμμετέχεις.",
                     ),
-                    const SizedBox(height: 10),
-                    const FAQItem(
+                    SizedBox(height: 10),
+                    FAQItem(
                       question: "4. Μπορώ να προσθέσω φίλους στην εφαρμογή;",
                       answer: "Ναι, μπορείς να προσθέσεις φίλους χρησιμοποιώντας το email τους ή το username τους.",
                     ),
-                    const SizedBox(height: 10),
-                    const FAQItem(
+                    SizedBox(height: 10),
+                    FAQItem(
                       question: "5. Είναι ασφαλή τα δεδομένα μου;",
                       answer: "Ναι, όλα τα δεδομένα αποθηκεύονται με ασφάλεια στο Firebase και είναι προσβάσιμα μόνο από εσένα.",
                     ),

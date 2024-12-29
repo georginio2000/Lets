@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import '../widgets/user_profile/profile_pic_username.dart';
-import '../widgets/user_profile/numbers_of_friends_activities.dart';
 import '../widgets/user_profile/bio_box.dart';
 import '../widgets/my_profile_page/past_activities_line.dart';
+import '../widgets/my_friends/friends_activities_widget_with_no_+_button.dart';
 class UserPage extends StatelessWidget {
   final String uid;
 
@@ -17,22 +17,19 @@ class UserPage extends StatelessWidget {
           height: MediaQuery.of(context).size.height,
           child: Stack(
             children: [
-              // Background
               Container(
                 height: MediaQuery.of(context).size.height,
                 color: const Color(0xFF9CC4C4),
               ),
-              // Positioned Profile
               Positioned(
                 top: 120,
                 left: MediaQuery.of(context).size.width / 2 - 60,
                 child: ProfileWidgetUser(uid: uid),
               ),
-              // Positioned Activities and Friends
               Positioned(
                 top: 320,
-                left: MediaQuery.of(context).size.width / 2 - 140,
-                child: FriendsActivitiesWidget(uid: uid),
+                left: MediaQuery.of(context).size.width / 2 - 130,
+                child: FriendsActivitiesWidgetNoButton(uid: uid),
               ),
               Positioned(
                 top: 400,
