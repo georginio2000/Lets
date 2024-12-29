@@ -7,74 +7,105 @@ import '../widgets/my_profile_page/numbers_of_friends_activities.dart';
 import '../widgets/my_profile_page/bio_box.dart';
 import '../widgets/my_profile_page/past_activities_line.dart';
 
-class ProfilePage extends StatelessWidget {
-  final TextEditingController bioController = TextEditingController();
+class ProfilePage extends StatefulWidget {
+  const ProfilePage({super.key});
 
-  ProfilePage({super.key});
+  @override
+  State<ProfilePage> createState() => _ProfilePageState();
+}
+
+class _ProfilePageState extends State<ProfilePage> {
+  late Future<void> _refreshFuture;
+
+  @override
+  void initState() {
+    super.initState();
+    _refreshFuture = _refreshData();
+  }
+
+  // Συνάρτηση για την ανάκτηση δεδομένων
+  Future<void> _refreshData() async {
+    setState(() {
+      // Κάνουμε refresh αναγκάζοντας τα FutureBuilder να ξαναφορτώσουν δεδομένα
+      _refreshFuture = Future.delayed(Duration.zero);
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color(0xFF9CC4C4),
-      body: SingleChildScrollView(
-        child: SizedBox(
-          height: MediaQuery.of(context).size.height,
-          width: MediaQuery.of(context).size.width,
-          child: Stack(
-            children: [
-              // Settings Button
-              Positioned(
-                top: 30,
-                right: 20,
-                child: SettingsIcon(
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => const SettingsPage(),
+      body: RefreshIndicator(
+        onRefresh: _refreshData, // Συνδέουμε τη λειτουργία refresh
+        child: FutureBuilder<void>(
+          future: _refreshFuture,
+          builder: (context, snapshot) {
+            if (snapshot.connectionState == ConnectionState.waiting) {
+              return const Center(child: CircularProgressIndicator());
+            }
+
+            return SingleChildScrollView(
+              child: SizedBox(
+                height: MediaQuery.of(context).size.height,
+                width: MediaQuery.of(context).size.width,
+                child: Stack(
+                  children: [
+                    // Settings Button
+                    Positioned(
+                      top: 30,
+                      right: 20,
+                      child: SettingsIcon(
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => const SettingsPage(),
+                            ),
+                          );
+                        },
                       ),
-                    );
-                  },
+                    ),
+                    // Add Friend Button
+                    Positioned(
+                      top: 30,
+                      left: 20,
+                      child: AddFriendButton(
+                        onPressed: () {},
+                      ),
+                    ),
+                    // Profile Picture and Username
+                    Positioned(
+                      top: 120,
+                      left: MediaQuery.of(context).size.width / 2 - 60,
+                      child: const ProfileWidget(),
+                    ),
+                    // Friends and Activities Count
+                    Positioned(
+                      top: 320,
+                      left: MediaQuery.of(context).size.width / 2 - 130,
+                      child: const FriendsActivitiesWidget(),
+                    ),
+                    // Bio Box
+                    Positioned(
+                      top: 400,
+                      left: MediaQuery.of(context).size.width / 2 - 150,
+                      child: const SizedBox(
+                        width: 300,
+                        child: BioBox(),
+                      ),
+                    ),
+                    // Past Activities Section
+                    const Positioned(
+                      top: 480,
+                      left: 0,
+                      right: 0,
+                      child: PastActivities(),
+                    ),
+                  ],
                 ),
               ),
-              // Add Friend Button
-              Positioned(
-                top: 30,
-                left: 20,
-                child: AddFriendButton(
-                  onPressed: () {},
-                ),
-              ),
-              // Profile Picture and Username
-              Positioned(
-                top: 120,
-                left: MediaQuery.of(context).size.width / 2 - 60,
-                child: const ProfileWidget(),
-              ),
-              // Friends and Activities Count
-              Positioned(
-                top: 320,
-                left: MediaQuery.of(context).size.width / 2 - 130,
-                child: const FriendsActivitiesWidget(),
-              ),
-              // Bio Box
-              Positioned(
-                top: 400,
-                left: MediaQuery.of(context).size.width / 2 - 150,
-                child: const SizedBox(
-                  width: 300,
-                  child: BioBox(),
-                ),
-              ),
-              // Past Activities Section
-              const Positioned(
-                top: 480,
-                left: 0,
-                right: 0,
-                child: PastActivities(),
-              ),
-            ],
-          ),
+            );
+          },
         ),
       ),
     );
