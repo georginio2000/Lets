@@ -5,7 +5,7 @@ import '../widgets/all_Lets/lets_explore.dart';
 import '../widgets/home/search_activity_box.dart';
 import '../widgets/home/filter_button.dart';
 import '../widgets/home/filter_dialog.dart';
-import 'package:firebase_auth/firebase_auth.dart'; // Add this import for current user
+import 'package:firebase_auth/firebase_auth.dart';
 
 class HomePage extends StatefulWidget {
   HomePage({Key? key}) : super(key: key);
@@ -22,11 +22,20 @@ class _HomePageState extends State<HomePage> {
 
   String? currentUserId;
 
+  late Future<void> _refreshFuture = Future.value(); // Default initialization
+
   @override
   void initState() {
     super.initState();
     currentUserId = FirebaseAuth.instance.currentUser?.uid; // Get current user's UID
-    _fetchTags();
+    _refreshFuture = _refreshData();
+  }
+
+  Future<void> _refreshData() async {
+    await _fetchTags();
+    setState(() {
+      // Trigger rebuild after data fetch
+    });
   }
 
   Future<void> _fetchTags() async {
@@ -86,52 +95,65 @@ class _HomePageState extends State<HomePage> {
     }
     return Scaffold(
       backgroundColor: const Color(0xFF9CC4C4),
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          const Padding(
-            padding: EdgeInsets.only(
-              top: 16.0,
-              left: 16.0,
-              right: 16.0,
-              bottom: 4.0,
-            ),
-            child: LetsExploreWidget(),
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16.0),
-            child: Row(
+      body: RefreshIndicator(
+        onRefresh: _refreshData,
+        child: FutureBuilder<void>(
+          future: _refreshFuture,
+          builder: (context, snapshot) {
+            if (snapshot.connectionState == ConnectionState.waiting) {
+              return const Center(child: CircularProgressIndicator());
+            }
+
+            return Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Expanded(
-                  child: SearchActivityBox(
-                    searchController: _searchController,
+                const Padding(
+                  padding: EdgeInsets.only(
+                    top: 16.0,
+                    left: 16.0,
+                    right: 16.0,
+                    bottom: 4.0,
+                  ),
+                  child: LetsExploreWidget(),
+                ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                  child: Row(
+                    children: [
+                      Expanded(
+                        child: SearchActivityBox(
+                          searchController: _searchController,
+                        ),
+                      ),
+                      const SizedBox(width: 10),
+                      isLoadingTags
+                          ? Container(
+                        width: 45,
+                        height: 45,
+                        alignment: Alignment.center,
+                        child: const CircularProgressIndicator(),
+                      )
+                          : FilterButton(
+                        onFilterPressed: _showFilterDialog,
+                      ),
+                    ],
                   ),
                 ),
-                const SizedBox(width: 10),
-                isLoadingTags
-                    ? Container(
-                  width: 45,
-                  height: 45,
-                  alignment: Alignment.center,
-                  child: const CircularProgressIndicator(),
-                )
-                    : FilterButton(
-                  onFilterPressed: _showFilterDialog,
+                const SizedBox(height: 8.0),
+                Expanded(
+                  child: ActivityFeed(
+                    currentUserId: currentUserId!,
+                    showFriendsOnly: false, // Show all activities except user's
+                    categoryFilter:
+                    selectedTags.isEmpty ? null : selectedTags.join(', '),
+                    maxParticipantsFilter: null,
+                    locationFilter: null,
+                  ),
                 ),
               ],
-            ),
-          ),
-          const SizedBox(height: 8.0),
-          Expanded(
-            child: ActivityFeed(
-              currentUserId: currentUserId!,
-              showFriendsOnly: false, // Show all activities except user's
-              categoryFilter: selectedTags.isEmpty ? null : selectedTags.join(', '),
-              maxParticipantsFilter: null,
-              locationFilter: null,
-            ),
-          ),
-        ],
+            );
+          },
+        ),
       ),
     );
   }
