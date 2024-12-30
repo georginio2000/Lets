@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:project/pages/settings_page.dart';
-import 'package:project/pages/main_screen.dart';
+import 'package:google_sign_in/google_sign_in.dart'; // Import Google Sign-In package
+import 'package:project/pages/main_screen.dart'; // Your Main Screen
 import '../widgets/login/login_button.dart';
 import '../widgets/login/forgot_your_password.dart';
 import '../pages/registration_page.dart';
@@ -23,7 +23,7 @@ class _LoginPageState extends State<LoginPage> {
   final FirebaseAuth _auth = FirebaseAuth.instance;
   bool _isPasswordVisible = false;
 
-  Future<void> signIn() async {
+  Future<void> signInWithEmailPassword() async {
     try {
       await _auth.signInWithEmailAndPassword(
         email: emailController.text.trim(),
@@ -41,6 +41,93 @@ class _LoginPageState extends State<LoginPage> {
     } catch (e) {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(content: Text('Login failed, try again.')),
+      );
+    }
+  }
+
+  Future<void> signInWithGoogle() async {
+    try {
+      final GoogleSignIn googleSignIn = GoogleSignIn();
+
+      // Show dialog to ask user if they want to use the same account or a different account
+      final result = await showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            backgroundColor: const Color(0xFF9CC4C4), // Same color as the login page
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(8), // Add rounded corners
+            ),
+            title: const Text(
+              'Sign-In Options',
+              style: TextStyle(color: Colors.black), // Text color
+            ),
+            content: const Text(
+              'Do you want to sign in with the same account or a different account?',
+              style: TextStyle(color: Colors.black), // Text color
+            ),
+            actions: [
+              TextButton(
+                onPressed: () {
+                  Navigator.pop(context, 'same');
+                },
+                child: const Text(
+                  'Same Account',
+                  style: TextStyle(color: Colors.black), // Text color
+                ),
+              ),
+              TextButton(
+                onPressed: () {
+                  Navigator.pop(context, 'different');
+                },
+                child: const Text(
+                  'Different Account',
+                  style: TextStyle(color: Colors.black), // Text color
+                ),
+              ),
+            ],
+          );
+        },
+      );
+
+      // If the user wants to use a different account, sign out
+      if (result == 'different') {
+        await googleSignIn.signOut();
+      }
+
+      // Continue with Google Sign-In
+      final GoogleSignInAccount? googleUser = await googleSignIn.signIn();
+
+      if (googleUser != null) {
+        final GoogleSignInAuthentication googleAuth =
+        await googleUser.authentication;
+
+        final OAuthCredential credential = GoogleAuthProvider.credential(
+          accessToken: googleAuth.accessToken,
+          idToken: googleAuth.idToken,
+        );
+
+        UserCredential userCredential =
+        await _auth.signInWithCredential(credential);
+
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+              content: Text('Welcome, ${userCredential.user?.displayName}!')),
+        );
+
+        // Navigate to the main screen
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (context) => const MainScreen()),
+        );
+      } else {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text('Google Sign-In canceled.')),
+        );
+      }
+    } catch (e) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Google Sign-In failed: $e')),
       );
     }
   }
@@ -76,7 +163,9 @@ class _LoginPageState extends State<LoginPage> {
                   obscureText: !_isPasswordVisible,
                   suffixIcon: IconButton(
                     icon: Icon(
-                      _isPasswordVisible ? Icons.visibility : Icons.visibility_off,
+                      _isPasswordVisible
+                          ? Icons.visibility
+                          : Icons.visibility_off,
                       color: Colors.black,
                     ),
                     onPressed: () {
@@ -91,9 +180,7 @@ class _LoginPageState extends State<LoginPage> {
 
                 // Login Button
                 LoginButton(
-                  onPressed: () {
-                    signIn();
-                  },
+                  onPressed: signInWithEmailPassword,
                 ),
 
                 const SizedBox(height: 6),
@@ -121,36 +208,29 @@ class _LoginPageState extends State<LoginPage> {
 
                 const SizedBox(height: 30),
 
-                // Microsoft
+                // Sign In With Google
+                SignInWith(
+                  text: "SIGN IN WITH GOOGLE",
+                  onPressed: signInWithGoogle, // Call Google Sign-In logic
+                ),
+
+                const SizedBox(height: 10),
+
+                // Sign In With Microsoft (Example Placeholder)
                 SignInWith(
                   text: "SIGN IN WITH MICROSOFT",
                   onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => const SettingsPage(),
-                      ),
-                    );
+                    print("SIGN IN WITH MICROSOFT RE BRO");
                   },
                 ),
 
                 const SizedBox(height: 10),
 
-                // Sign Up With Facebook
+                // Sign Up With Facebook (Example Placeholder)
                 SignInWith(
                   text: "SIGN IN WITH FACEBOOK",
                   onPressed: () {
                     print("SIGN IN WITH FACEBOOK RE BRO");
-                  },
-                ),
-
-                const SizedBox(height: 10),
-
-                // Sign Up With Google
-                SignInWith(
-                  text: "SIGN IN WITH GOOGLE",
-                  onPressed: () {
-                    print("SIGN IN WITH GOOGLE RE BRO");
                   },
                 ),
               ],
