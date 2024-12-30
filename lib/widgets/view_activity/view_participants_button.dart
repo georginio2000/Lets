@@ -6,9 +6,9 @@ class ViewParticipantsButton extends StatelessWidget {
   final String activityId;
 
   const ViewParticipantsButton({
-    Key? key,
+    super.key,
     required this.activityId,
-  }) : super(key: key);
+  });
 
   void _showParticipantsDialog(BuildContext context, String activityId) {
     showDialog(

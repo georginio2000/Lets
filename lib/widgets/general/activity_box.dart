@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:project/pages/view_activity_page.dart'; // Replace with the correct path to ViewActivityPage
 
@@ -47,9 +46,9 @@ class ActivityBox extends StatelessWidget {
         final description = activityData['description'] ?? 'No description';
         final time = activityData['time'] ?? 'No time specified';
         final location = activityData['location'] ?? 'No location specified';
-        final distance = "5km"; // Placeholder distance
+        const distance = "5km"; // Placeholder distance
         final numParticipants = activityData['numParticipants'] ?? 0;
-        final maxParticipants = 20;
+        const maxParticipants = 20;
 
         return GestureDetector(
           onTap: () {
@@ -223,9 +222,9 @@ class ActivityBox extends StatelessWidget {
                                         ),
                                         overflow: TextOverflow.ellipsis, // Handles long text
                                       ),
-                                      Text(
+                                      const Text(
                                         '($distance away)',
-                                        style: const TextStyle(
+                                        style: TextStyle(
                                           fontSize: 10,
                                           color: Colors.black54,
                                         ),

@@ -4,6 +4,8 @@ import '../widgets/general/activity_feed.dart';
 import '../widgets/all_Lets/lets_friends.dart';
 
 class FriendsPage extends StatefulWidget {
+  const FriendsPage({super.key});
+
   @override
   State<FriendsPage> createState() => _FriendsPageState();
 }

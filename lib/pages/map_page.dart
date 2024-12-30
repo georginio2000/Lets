@@ -5,33 +5,37 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart'; // Import Firebase Core
 import '../widgets/map/map_activity_button.dart'; // Import the ActivityButton widget
-import '../pages/view_activity_page.dart'; // Import the ActivityButton widget
+// Import the ActivityButton widget
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized(); // Ensure bindings are initialized
   await Firebase.initializeApp(); // Initialize Firebase
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false, // Remove debug banner
       title: 'Flutter Map Example',
       theme: ThemeData.dark(), // Optional: Use a dark theme for the app
-      home: MapPage(),
+      home: const MapPage(),
     );
   }
 }
 
 class MapPage extends StatefulWidget {
+  const MapPage({super.key});
+
   @override
   _MapPageState createState() => _MapPageState();
 }
 
 class _MapPageState extends State<MapPage> {
-  List<Marker> _markers = []; // List to hold markers
+  final List<Marker> _markers = []; // List to hold markers
 
   @override
   void initState() {
@@ -117,7 +121,7 @@ class _MapPageState extends State<MapPage> {
         children: [
           TileLayer(
             urlTemplate: "https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png", // Dark theme
-            subdomains: ['a', 'b', 'c'],
+            subdomains: const ['a', 'b', 'c'],
           ),
           MarkerLayer(
             markers: _markers, // Dynamically loaded markers

@@ -5,6 +5,8 @@ import '../widgets/register/register_join_submit_create_button.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class AddPage extends StatefulWidget {
+  const AddPage({super.key});
+
   @override
   _AddPageState createState() => _AddPageState();
 }
@@ -328,10 +330,10 @@ class _AddPageState extends State<AddPage> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   const SizedBox(width: 26),
-                  Column(
+                  const Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const Text(
+                      Text(
                         "NUMBER OF PARTICIPANTS:",
                         style: TextStyle(
                           fontSize: 16,
@@ -339,8 +341,8 @@ class _AddPageState extends State<AddPage> {
                           color: Colors.black,
                         ),
                       ),
-                      const SizedBox(height: 5),
-                      const Text(
+                      SizedBox(height: 5),
+                      Text(
                         "LEAVE EMPTY IF NO PREFERENCE",
                         style: TextStyle(
                           fontSize: 12,

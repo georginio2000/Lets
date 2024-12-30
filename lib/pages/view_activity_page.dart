@@ -11,7 +11,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 class ViewActivityPage extends StatefulWidget {
   final String activityId;
 
-  const ViewActivityPage({Key? key, required this.activityId}) : super(key: key);
+  const ViewActivityPage({super.key, required this.activityId});
 
   @override
   _ViewActivityPageState createState() => _ViewActivityPageState();
@@ -295,7 +295,7 @@ class _ViewActivityPageState extends State<ViewActivityPage> {
                         .toList(),
                   ),
                   const SizedBox(height: 20),
-                  ActivityPhotosLine(),
+                  const ActivityPhotosLine(),
                 ],
               ),
             ),
@@ -364,10 +364,12 @@ void main() async {
   await Firebase.initializeApp();
 
   // Run the app
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -376,12 +378,14 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.teal,
       ),
-      home: TestViewActivityPage(),
+      home: const TestViewActivityPage(),
     );
   }
 }
 
 class TestViewActivityPage extends StatelessWidget {
+  const TestViewActivityPage({super.key});
+
   @override
   Widget build(BuildContext context) {
     // Replace this with a valid activityId from your Firestore database
@@ -398,7 +402,7 @@ class TestViewActivityPage extends StatelessWidget {
             Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (context) => ViewActivityPage(activityId: testActivityId),
+                builder: (context) => const ViewActivityPage(activityId: testActivityId),
               ),
             );
           },

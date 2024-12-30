@@ -76,7 +76,7 @@ class RegistrationPage extends StatelessWidget {
         Navigator.pushReplacement(
           context,
           MaterialPageRoute(
-            builder: (context) => MainScreen(),
+            builder: (context) => const MainScreen(),
           ),
         );
       } catch (e) {

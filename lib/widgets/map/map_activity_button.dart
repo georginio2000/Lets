@@ -7,11 +7,11 @@ class MapActivityButton extends StatelessWidget {
   final String activityId;
 
   const MapActivityButton({
-    Key? key,
+    super.key,
     required this.title,
     required this.time,
     required this.activityId,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +29,7 @@ class MapActivityButton extends StatelessWidget {
       child: Container(
         width: 120, // Fixed width
         height: 55, // Fixed height
-        padding: EdgeInsets.all(5),
+        padding: const EdgeInsets.all(5),
         decoration: BoxDecoration(
           color: const Color(0xFF50B498),
           border: Border.all(
@@ -48,7 +48,7 @@ class MapActivityButton extends StatelessWidget {
           children: [
             Text(
               title,
-              style: TextStyle(
+              style: const TextStyle(
                 fontSize: 15,
                 fontWeight: FontWeight.bold,
                 color: Colors.black,
@@ -56,19 +56,19 @@ class MapActivityButton extends StatelessWidget {
               overflow: TextOverflow.ellipsis, // Handle long text
               maxLines: 1, // Limit title to one line
             ),
-            SizedBox(height: 4),
+            const SizedBox(height: 4),
             Row(
               children: [
-                Icon(
+                const Icon(
                   Icons.access_time,
                   size: 14,
                   color: Colors.black,
                 ),
-                SizedBox(width: 4),
+                const SizedBox(width: 4),
                 Expanded(
                   child: Text(
                     time,
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontSize: 12,
                       color: Colors.black,
                     ),
