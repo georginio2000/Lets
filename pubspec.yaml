@@ -38,7 +38,8 @@ dependencies:
   firebase_storage: ^11.0.10
   image_picker: ^0.8.7+5 # For picking images from the device
   firebase_messaging: ^14.7.1
-
+  flutter_map: ^4.0.0
+  flutter_map_marker_popup: ^5.1.0
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.8

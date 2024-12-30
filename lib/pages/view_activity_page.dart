@@ -1,7 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
-import '../widgets/register/register_join_submit_create_button.dart'; // Replace with the actual path to your custom button file
+import '../widgets/register/register_join_submit_create_button.dart';
+import '../widgets/view_activity/view_participants_button.dart';
+import '../widgets/view_activity/activity_photos_line.dart';
+import '../widgets/my_friends/user_box_friend.dart'; // Replace with the actual path
+import 'package:flutter_svg/flutter_svg.dart';
+
 
 class ViewActivityPage extends StatefulWidget {
   final String activityId;
@@ -14,6 +19,7 @@ class ViewActivityPage extends StatefulWidget {
 
 class _ViewActivityPageState extends State<ViewActivityPage> {
   Map<String, dynamic>? activityData;
+  Map<String, dynamic>? creatorData; // For storing the creator's details
   bool isLoading = true;
   bool isJoining = false;
 
@@ -31,8 +37,14 @@ class _ViewActivityPageState extends State<ViewActivityPage> {
           .get();
 
       if (activitySnapshot.exists) {
+        activityData = activitySnapshot.data() as Map<String, dynamic>;
+
+        // Fetch the creator's details using the `createdBy` field
+        if (activityData?['createdBy'] != null) {
+          await _fetchCreatorDetails(activityData!['createdBy']);
+        }
+
         setState(() {
-          activityData = activitySnapshot.data() as Map<String, dynamic>;
           isLoading = false;
         });
       } else {
@@ -48,6 +60,23 @@ class _ViewActivityPageState extends State<ViewActivityPage> {
       setState(() {
         isLoading = false;
       });
+    }
+  }
+
+  Future<void> _fetchCreatorDetails(String creatorId) async {
+    try {
+      DocumentSnapshot creatorSnapshot = await FirebaseFirestore.instance
+          .collection('users') // Assuming the user data is stored in the 'users' collection
+          .doc(creatorId)
+          .get();
+
+      if (creatorSnapshot.exists) {
+        setState(() {
+          creatorData = creatorSnapshot.data() as Map<String, dynamic>;
+        });
+      }
+    } catch (e) {
+      print("Error fetching creator details: $e");
     }
   }
 
@@ -134,7 +163,7 @@ class _ViewActivityPageState extends State<ViewActivityPage> {
               "Activity not found.",
               style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
             ),
-            const SizedBox(height: 20),
+            const SizedBox(height: 40),
             RegisterJoinSubmitCreateButton(
               labelText: "Back",
               onPressed: () {
@@ -145,157 +174,164 @@ class _ViewActivityPageState extends State<ViewActivityPage> {
           ],
         ),
       )
-          : SingleChildScrollView(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
+          : Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 16.0), // Padding left and right
+        child: Stack(
           children: [
-            const SizedBox(height: 50),
-            Center(
-              child: Text(
-                activityData?['title'] ?? "No Title",
-                style: const TextStyle(
-                  fontSize: 24,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.black,
-                ),
-              ),
-            ),
-            const SizedBox(height: 20),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Row(
-                  children: [
-                    const Icon(Icons.location_on, size: 24),
-                    Text(
-                      activityData?['location'] ?? "N/A",
-                      style: const TextStyle(fontSize: 20),
+            // Scrollable Content
+            SingleChildScrollView(
+              padding: const EdgeInsets.only(bottom: 100), // Add padding to avoid overlap with buttons
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  const SizedBox(height: 50),
+                  Center(
+                    child: Text(
+                      activityData?['title'] ?? "No Title",
+                      style: const TextStyle(
+                        fontSize: 24,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.black,
+                      ),
                     ),
-                  ],
-                ),
-                const SizedBox(width: 50),
-                Row(
-                  children: [
-                    const Icon(Icons.access_time, size: 24),
-                    Text(
-                      activityData?['dateTime'] ?? "N/A",
-                      style: const TextStyle(fontSize: 20),
-                    ),
-                  ],
-                ),
-              ],
-            ),
-            const SizedBox(height: 20),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                const Icon(Icons.people, size: 24),
-                Text(
-                  "${(activityData?['joinedParticipants'] ?? []).length} / ${(activityData?['numParticipants'] ?? '-')}",
-                  style: const TextStyle(fontSize: 20),
-                ),
-              ],
-            ),
-            const SizedBox(height: 20),
-            Container(
-              width: 80, // Custom width
-              height: 30, // Custom height
-              decoration: BoxDecoration(
-                border: Border.all(color: Colors.black, width: 1), // Add border
-                borderRadius: BorderRadius.circular(2), // Custom border radius
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.grey.withOpacity(0.5),
-                    spreadRadius: 2,
-                    blurRadius: 5,
-                    offset: const Offset(0, 3), // Shadow position
                   ),
+                  const SizedBox(height: 30),
+                  if (creatorData != null)
+                    AddFriendWidget(
+                      username: creatorData?['username'] ?? "Unknown User",
+                      uid: activityData?['createdBy'] ?? "", // Pass the UID of the creator
+                      onAddFriendPressed: () {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(content: Text("Friend request sent to ${creatorData?['username']}!")),
+                        );
+                      },
+                    ),
+                  const SizedBox(height: 30),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Row(
+                        children: [
+                          SvgPicture.asset(
+                            'assets/SMALL_MAP_ICON.svg', // Path to your SVG file
+                            height: 24, // Set the height
+                          ),                          Text(
+                            activityData?['location'] ?? "N/A",
+                            style: const TextStyle(fontSize: 20),
+                          ),
+                        ],
+                      ),
+                      const SizedBox(width: 50),
+                      Row(
+                        children: [
+                          const Icon(Icons.access_time, size: 24),
+                          Text(
+                            activityData?['dateTime'] ?? "N/A",
+                            style: const TextStyle(fontSize: 20),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: 40),
+                  Center(
+                    child: Text(
+                      "Skill Level: ${activityData?['skillLevel'] ?? 'N/A'}",
+                      style: const TextStyle(fontSize: 16),
+                    ),
+                  ),
+                  const SizedBox(height: 40),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      SvgPicture.asset(
+                        'assets/PARTICIPANTS_ICON.svg', // Path to your SVG file
+                        height: 24, // Set the height
+                      ),                      Text(
+                        "${(activityData?['joinedParticipants'] ?? []).length} / ${(activityData?['numParticipants'] ?? '-')}",
+                        style: const TextStyle(fontSize: 20),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: 20),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      ViewParticipantsButton(activityId: widget.activityId),
+                    ],
+                  ),
+                  const SizedBox(height: 20),
+                  _styledContainer(
+                    child: Text(
+                      "${activityData?['description'] ?? 'No Description'}",
+                      style: const TextStyle(fontSize: 16),
+                    ),
+                  ),
+                  const SizedBox(height: 20),
+                  Wrap(
+                    spacing: 8.0,
+                    runSpacing: 8.0,
+                    children: (activityData?['tags'] ?? [])
+                        .map<Widget>(
+                          (tag) => Container(
+                        height: 20,
+                        decoration: BoxDecoration(
+                          color: const Color(0xFF468585),
+                          borderRadius: BorderRadius.circular(12),
+                          border: Border.all(color: Colors.black, width: 1),
+                        ),
+                        padding: const EdgeInsets.symmetric(horizontal: 8),
+                        child: Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Text(
+                              tag,
+                              style: const TextStyle(color: Colors.white, fontSize: 12),
+                            ),
+                          ],
+                        ),
+                      ),
+                    )
+                        .toList(),
+                  ),
+                  const SizedBox(height: 20),
+                  ActivityPhotosLine(),
                 ],
               ),
-              child: ElevatedButton(
-                onPressed: _viewParticipants,
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: const Color(0xFF50B498), // Custom background color
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(2), // Match the container radius
-                  ),
-                  padding: EdgeInsets.zero, // Remove extra padding from the button
-                ),
-                child: const Text(
-                  "VIEW PARTICIPANTS",
-                  style: TextStyle(
-                    fontSize: 14,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.black, // Text color
-                  ),
-                ),
-              ),
             ),
-
-
-            const SizedBox(height: 20),
-            _styledContainer(
-              child: Text(
-                "\n${activityData?['description'] ?? 'No Description'}",
-                style: const TextStyle(fontSize: 16),
-              ),
-            ),
-            const SizedBox(height: 20),
-            Wrap(
-              spacing: 8.0,
-              runSpacing: 8.0,
-              children: (activityData?['tags'] ?? [])
-                  .map<Widget>((tag) => Container(
-                height: 20,
-                decoration: BoxDecoration(
-                  color: const Color(0xFF468585),
-                  borderRadius: BorderRadius.circular(12),
-                  border: Border.all(color: Colors.black, width: 1),
-                ),
-                padding: const EdgeInsets.symmetric(horizontal: 8),
+            // Fixed Buttons at the Bottom
+            Positioned(
+              bottom: 0,
+              left: 0,
+              right: 0,
+              child: Container(
+                color: const Color(0xFF9CC4C4), // Background color for the button bar
+                padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
                 child: Row(
-                  mainAxisSize: MainAxisSize.min,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text(
-                      tag,
-                      style: const TextStyle(color: Colors.white, fontSize: 12),
+                    RegisterJoinSubmitCreateButton(
+                      labelText: "Back",
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
+                      color: const Color(0xFFB47150),
+                    ),
+                    RegisterJoinSubmitCreateButton(
+                      labelText: "Join",
+                      onPressed: _joinActivity,
+                      color: const Color(0xFF50B498),
                     ),
                   ],
                 ),
-              ))
-                  .toList(),
-            ),
-            const SizedBox(height: 20),
-            _styledContainer(
-              child: Text(
-                "Skill Level: ${activityData?['skillLevel'] ?? 'N/A'}",
-                style: const TextStyle(fontSize: 16),
               ),
-            ),
-            const SizedBox(height: 30),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                RegisterJoinSubmitCreateButton(
-                  labelText: "Back",
-                  onPressed: () {
-                    Navigator.pop(context);
-                  },
-                  color: const Color(0xFFB47150),
-                ),
-                RegisterJoinSubmitCreateButton(
-                  labelText: "Join",
-                  onPressed: _joinActivity,
-                  color: const Color(0xFF50B498),
-                ),
-              ],
             ),
           ],
         ),
       ),
     );
   }
+
 
   Widget _styledContainer({required Widget child}) {
     return Container(
@@ -317,7 +353,6 @@ class _ViewActivityPageState extends State<ViewActivityPage> {
     );
   }
 }
-
 
 
 

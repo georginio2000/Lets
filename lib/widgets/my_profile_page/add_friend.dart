@@ -121,7 +121,7 @@ class _AddFriendPopupState extends State<AddFriendPopup> {
   @override
   Widget build(BuildContext context) {
     return Dialog(
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(0)),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(2)),
       backgroundColor: const Color(0xFF9CC4C4),
       child: SizedBox(
         width: MediaQuery.of(context).size.width * 0.8,
