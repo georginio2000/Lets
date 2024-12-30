@@ -17,6 +17,7 @@ class MapActivityButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
+        print('Button tapped!');
         // Navigation logic here
         Navigator.push(
           context,
