@@ -6,6 +6,8 @@ import '../widgets/home/search_activity_box.dart';
 import '../widgets/home/filter_button.dart';
 import '../widgets/home/filter_dialog.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import '../widgets/general/activity_box.dart';
+
 
 class HomePage extends StatefulWidget {
   HomePage({Key? key}) : super(key: key);
@@ -21,6 +23,7 @@ class _HomePageState extends State<HomePage> {
   bool isLoadingTags = true;
 
   String? currentUserId;
+  String? searchedActivityId;
 
   late Future<void> _refreshFuture = Future.value(); // Default initialization
 
@@ -86,6 +89,44 @@ class _HomePageState extends State<HomePage> {
     }
   }
 
+  // Άδεια συνάρτηση για την αναζήτηση
+  void _searchActivity() async {
+    final activityId = _searchController.text.trim();
+
+    if (activityId.isEmpty) {
+      // If the search box is empty, clear any existing activity details
+      setState(() {
+        searchedActivityId = null; // Reset the searched activity
+      });
+      return;
+    }
+
+    try {
+      DocumentSnapshot<Map<String, dynamic>> docSnapshot =
+      await FirebaseFirestore.instance.collection('activities').doc(activityId).get();
+
+      if (docSnapshot.exists) {
+        setState(() {
+          searchedActivityId = activityId; // Set the searched activity ID
+        });
+      } else {
+        setState(() {
+          searchedActivityId = null; // Reset the searched activity
+        });
+
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text('No activity found with the given ID')),
+        );
+      }
+    } catch (e) {
+      print('Error searching activity: $e');
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Error: $e')),
+      );
+    }
+  }
+
+
   @override
   Widget build(BuildContext context) {
     if (currentUserId == null) {
@@ -123,6 +164,7 @@ class _HomePageState extends State<HomePage> {
                       Expanded(
                         child: SearchActivityBox(
                           searchController: _searchController,
+                          onSearchPressed: _searchActivity, // Trigger search action
                         ),
                       ),
                       const SizedBox(width: 10),
@@ -140,8 +182,11 @@ class _HomePageState extends State<HomePage> {
                   ),
                 ),
                 const SizedBox(height: 8.0),
-                Expanded(
-                  child: ActivityFeed(
+                Flexible(
+                  fit: FlexFit.loose,
+                  child: searchedActivityId != null
+                      ? ActivityBox(activityId: searchedActivityId!)
+                      : ActivityFeed(
                     currentUserId: currentUserId!,
                     showFriendsOnly: false, // Show all activities except user's
                     categoryFilter:
