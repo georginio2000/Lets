@@ -62,7 +62,7 @@ class _LoginPageState extends State<LoginPage> {
 
                 // Username Box
                 UsernamePasswordBox(
-                  labelText: "USERNAME",
+                  labelText: "EMAIL",
                   controller: emailController,
                   obscureText: false,
                 ),
