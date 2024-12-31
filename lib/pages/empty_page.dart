@@ -1,0 +1,176 @@
+import 'package:flutter/material.dart';
+import 'package:project/pages/login_page.dart';
+import 'package:project/pages/main_screen.dart';
+import '../widgets/register/box_for_register_page.dart';
+import '../widgets/register/register_join_submit_create_button.dart';
+import '../widgets/register/register_age.dart';
+import '../widgets/register/gender_dropdown.dart';
+import '../widgets/all_Lets/lets_register.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+
+class RegistrationPageWith extends StatelessWidget {
+  final String email; // Accept email as a parameter
+
+  const RegistrationPageWith({super.key, required this.email});
+
+  @override
+  Widget build(BuildContext context) {
+    final TextEditingController firstnameController = TextEditingController();
+    final TextEditingController lastnameController = TextEditingController();
+    final TextEditingController phonenumberController = TextEditingController();
+    final TextEditingController usernameController = TextEditingController();
+    final TextEditingController ageController = TextEditingController();
+    final TextEditingController genderController = TextEditingController();
+    String selectedGender = "Male"; // Default gender
+
+    void registerUser() async {
+      try {
+        // Get the currently signed-in user's UID from FirebaseAuth
+        User? currentUser = FirebaseAuth.instance.currentUser;
+        if (currentUser == null) {
+          throw Exception("No user is currently signed in.");
+        }
+
+        String uid = currentUser.uid; // Get the UID from the signed-in user
+
+        // Add user details to Firestore database
+        await FirebaseFirestore.instance.collection("users").doc(uid).set({
+          "firstname": firstnameController.text,
+          "lastname": lastnameController.text,
+          "email": email, // Use the email passed as a parameter
+          "phone": phonenumberController.text,
+          "username": usernameController.text,
+          "gender": selectedGender,
+          "age": int.tryParse(ageController.text) ?? 0,
+          "uid": uid,
+          "createdAt": DateTime.now().toIso8601String(),
+          "friends": [], // Initialize empty friends list
+        });
+
+        // Navigate to the MainScreen
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(
+            builder: (context) => const MainScreen(),
+          ),
+        );
+      } catch (e) {
+        // Show error message if registration fails
+        showDialog(
+          context: context,
+          builder: (context) => AlertDialog(
+            title: const Text("Error"),
+            content: Text(e.toString()),
+            actions: [
+              TextButton(
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+                child: const Text("OK"),
+              )
+            ],
+          ),
+        );
+      }
+    }
+
+    return Scaffold(
+      backgroundColor: const Color(0xFF9CC4C4),
+      body: Center(
+        child: SingleChildScrollView(
+          child: Padding(
+            padding: const EdgeInsets.all(20.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                const LetsRegisterWidget(),
+
+                const SizedBox(height: 30),
+
+                BoxForRegisterPage(
+                  hintText: "FIRST NAME",
+                  controller: firstnameController,
+                  obscureText: false,
+                  keyboardType: TextInputType.text,
+                ),
+
+                const SizedBox(height: 15),
+
+                BoxForRegisterPage(
+                  hintText: "LAST NAME",
+                  controller: lastnameController,
+                  obscureText: false,
+                  keyboardType: TextInputType.text,
+                ),
+
+                const SizedBox(height: 15),
+
+                BoxForRegisterPage(
+                  hintText: "PHONE NUMBER",
+                  controller: phonenumberController,
+                  obscureText: false,
+                  keyboardType: TextInputType.number,
+                ),
+
+                const SizedBox(height: 15),
+
+                BoxForRegisterPage(
+                  hintText: "USERNAME",
+                  controller: usernameController,
+                  obscureText: false,
+                  keyboardType: TextInputType.text,
+                ),
+
+                const SizedBox(height: 15),
+
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    AgeBox(
+                      controller: ageController,
+                      keyboardType: TextInputType.number,
+                    ),
+                    const SizedBox(width: 20),
+                    GenderDropdownMenu(
+                      onChanged: (String? value) {
+                        selectedGender = value!;
+                        print("Selected Gender: $selectedGender"); // Optional: Debugging log
+                      },
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 45),
+
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    RegisterJoinSubmitCreateButton(
+                      labelText: "BACK",
+                      color: const Color(0xFFB47150),
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const LoginPage(),
+                          ),
+                        );
+                        print("BACK O BRO, WRAIOS");
+                      },
+                    ),
+                    const SizedBox(width: 30),
+                    RegisterJoinSubmitCreateButton(
+                      labelText: "REGISTER",
+                      color: const Color(0xFF50B498),
+                      onPressed: registerUser, // Call the registerUser function
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}

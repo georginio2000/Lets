@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:google_sign_in/google_sign_in.dart'; // Import Google Sign-In package
-import 'package:project/pages/main_screen.dart'; // Your Main Screen
+import 'package:google_sign_in/google_sign_in.dart';
+import 'package:project/pages/main_screen.dart';
 import '../widgets/login/login_button.dart';
 import '../widgets/login/forgot_your_password.dart';
 import '../pages/registration_page.dart';
@@ -9,6 +9,9 @@ import '../widgets/login/sign_in_with.dart';
 import '../widgets/login/dont_have_account.dart';
 import '../widgets/login/login_username_password_box.dart';
 import '../widgets/all_Lets/lets_start.dart';
+import 'package:project/pages/empty_page.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -95,7 +98,6 @@ class _LoginPageState extends State<LoginPage> {
         await googleSignIn.signOut();
       }
 
-
       // Continue with Google Sign-In
       final GoogleSignInAccount? googleUser = await googleSignIn.signIn();
 
@@ -113,14 +115,34 @@ class _LoginPageState extends State<LoginPage> {
 
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-              content: Text('Welcome, ${userCredential.user?.displayName}!')),
+            content: Text('Welcome, ${userCredential.user?.displayName}!'),
+          ),
         );
 
-        // Navigate to the main screen
-        Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(builder: (context) => const MainScreen()),
-        );
+        // Check if the user is signing in for the first time
+        final userDoc = await FirebaseFirestore.instance
+            .collection('users')
+            .doc(userCredential.user!.uid)
+            .get();
+
+        if (!userDoc.exists) {
+          // User is signing in for the first time, navigate to the registration page with email
+          Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(
+              builder: (context) => RegistrationPageWith(
+                email: userCredential.user!.email!, // Pass the email to the registration page
+              ),
+            ),
+          );
+        } else {
+          // Navigate to the main screen if user already exists
+          Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(builder: (context) => const MainScreen()),
+          );
+        }
+
       } else {
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(content: Text('Google Sign-In canceled.')),
@@ -132,6 +154,7 @@ class _LoginPageState extends State<LoginPage> {
       );
     }
   }
+
 
   @override
   Widget build(BuildContext context) {
