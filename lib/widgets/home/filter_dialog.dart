@@ -167,7 +167,7 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return const MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'FilterDialog Test',
       home: FilterDialogTestScreen(),
@@ -176,6 +176,8 @@ class MyApp extends StatelessWidget {
 }
 
 class FilterDialogTestScreen extends StatefulWidget {
+  const FilterDialogTestScreen({super.key});
+
   @override
   State<FilterDialogTestScreen> createState() => _FilterDialogTestScreenState();
 }
@@ -188,7 +190,7 @@ class _FilterDialogTestScreenState extends State<FilterDialogTestScreen> {
       context: context,
       builder: (BuildContext context) {
         return FilterDialog(
-          allTags: ['Sports', 'Music', 'Art', 'Technology', 'Travel', 'Food'],
+          allTags: const ['Sports', 'Music', 'Art', 'Technology', 'Travel', 'Food'],
           initialSelectedTags: selectedTags,
           onApply: (List<String> tags) {
             setState(() {

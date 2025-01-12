@@ -4,6 +4,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import '../widgets/my_profile_page/add_friend_button.dart';
 import '../widgets/my_profile_page/add_friend.dart';
 import '../widgets/my_friends/user_box_friend.dart';
+import '../widgets/settings/back_arrow_button.dart'; // Import your custom BACKButton
+
 
 class MyFriendsPage extends StatelessWidget {
   const MyFriendsPage({super.key});
@@ -104,20 +106,10 @@ class MyFriendsPage extends StatelessWidget {
           Positioned(
             top: 30,
             left: 16,
-            child: Container(
-              decoration: BoxDecoration(
-                color: const Color(0xFF50B498),
-                border: Border.all(color: Colors.black, width: 1),
-                borderRadius: BorderRadius.circular(2),
-              ),
-              child: IconButton(
-                icon: const Icon(Icons.arrow_back),
-                color: Colors.black,
-                iconSize: 24,
-                onPressed: () {
-                  Navigator.pop(context);
-                },
-              ),
+            child: BACKButton(
+              onPressed: () {
+                Navigator.pop(context);
+              },
             ),
           ),
           // Add Friend Button

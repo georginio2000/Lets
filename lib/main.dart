@@ -4,7 +4,7 @@ import 'package:project/pages/login_page.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp(); // Αρχικοποίηση του Firebase
+  await Firebase.initializeApp();
 
   runApp(const MyApp());
 }
@@ -20,7 +20,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const LoginPage(), // Αρχική σελίδα
+      home: const LoginPage(),
     );
   }
 }

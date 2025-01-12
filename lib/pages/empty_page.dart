@@ -9,60 +9,36 @@ import '../widgets/all_Lets/lets_register.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
+class RegistrationPageWith extends StatelessWidget {
+  final String email; // Accept email as a parameter
 
-class RegistrationPage extends StatelessWidget {
-  const RegistrationPage({super.key});
+  const RegistrationPageWith({super.key, required this.email});
 
   @override
   Widget build(BuildContext context) {
     final TextEditingController firstnameController = TextEditingController();
     final TextEditingController lastnameController = TextEditingController();
     final TextEditingController phonenumberController = TextEditingController();
-    final TextEditingController repeatpasswordController = TextEditingController();
-    final TextEditingController passwordController = TextEditingController();
     final TextEditingController usernameController = TextEditingController();
-    final TextEditingController emailController = TextEditingController();
     final TextEditingController ageController = TextEditingController();
     final TextEditingController genderController = TextEditingController();
     String selectedGender = "Male"; // Default gender
 
-
     void registerUser() async {
       try {
-        // Validate that passwords match
-        if (passwordController.text != repeatpasswordController.text) {
-          showDialog(
-            context: context,
-            builder: (context) => AlertDialog(
-              title: const Text("Error"),
-              content: const Text("Passwords do not match!"),
-              actions: [
-                TextButton(
-                  onPressed: () {
-                    Navigator.pop(context);
-                  },
-                  child: const Text("OK"),
-                )
-              ],
-            ),
-          );
-          return;
+        // Get the currently signed-in user's UID from FirebaseAuth
+        User? currentUser = FirebaseAuth.instance.currentUser;
+        if (currentUser == null) {
+          throw Exception("No user is currently signed in.");
         }
 
-        // Create Firebase Authentication user
-        UserCredential userCredential = await FirebaseAuth.instance.createUserWithEmailAndPassword(
-          email: emailController.text,
-          password: passwordController.text,
-        );
+        String uid = currentUser.uid; // Get the UID from the signed-in user
 
-        // Get the user's UID
-        String uid = userCredential.user!.uid;
-
-        // Add user to Firestore database
+        // Add user details to Firestore database
         await FirebaseFirestore.instance.collection("users").doc(uid).set({
           "firstname": firstnameController.text,
           "lastname": lastnameController.text,
-          "email": emailController.text,
+          "email": email, // Use the email passed as a parameter
           "phone": phonenumberController.text,
           "username": usernameController.text,
           "gender": selectedGender,
@@ -131,15 +107,6 @@ class RegistrationPage extends StatelessWidget {
                 const SizedBox(height: 15),
 
                 BoxForRegisterPage(
-                  hintText: "EMAIL",
-                  controller: emailController,
-                  obscureText: false,
-                  keyboardType: TextInputType.text,
-                ),
-
-                const SizedBox(height: 15),
-
-                BoxForRegisterPage(
                   hintText: "PHONE NUMBER",
                   controller: phonenumberController,
                   obscureText: false,
@@ -157,26 +124,9 @@ class RegistrationPage extends StatelessWidget {
 
                 const SizedBox(height: 15),
 
-                BoxForRegisterPage(
-                  hintText: "PASSWORD",
-                  controller: passwordController,
-                  obscureText: true,
-                  keyboardType: TextInputType.text,
-                ),
-
-                const SizedBox(height: 15),
-
-                BoxForRegisterPage(
-                  hintText: "REPEAT PASSWORD",
-                  controller: repeatpasswordController,
-                  obscureText: true,
-                  keyboardType: TextInputType.text,
-                ),
-
-                const SizedBox(height: 15),
                 Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children:[
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
                     AgeBox(
                       controller: ageController,
                       keyboardType: TextInputType.number,
@@ -187,7 +137,8 @@ class RegistrationPage extends StatelessWidget {
                         selectedGender = value!;
                         print("Selected Gender: $selectedGender"); // Optional: Debugging log
                       },
-                    ),                  ]
+                    ),
+                  ],
                 ),
                 const SizedBox(height: 45),
 

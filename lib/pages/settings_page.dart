@@ -9,6 +9,7 @@ import '../widgets/settings/faq.dart';
 import '../widgets/settings/feedback_support_dialog.dart';
 import '../widgets/settings/change_password_dialog.dart';
 import '../widgets/settings/change_username_dialog.dart';
+import '../widgets/settings/back_arrow_button.dart'; // Import your custom BACKButton widget
 
 class SettingsPage extends StatelessWidget {
   const SettingsPage({super.key});
@@ -29,20 +30,10 @@ class SettingsPage extends StatelessWidget {
                   Container(
                     alignment: Alignment.topLeft,
                     margin: const EdgeInsets.only(bottom: 20),
-                    child: Container(
-                      decoration: BoxDecoration(
-                        color: const Color(0xFF50B498),
-                        border: Border.all(color: Colors.black, width: 1),
-                        borderRadius: BorderRadius.circular(2),
-                      ),
-                      child: IconButton(
-                        icon: const Icon(Icons.arrow_back),
-                        color: Colors.black,
-                        iconSize: 24,
-                        onPressed: () {
-                          Navigator.pop(context);
-                        },
-                      ),
+                    child: BACKButton(
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
                     ),
                   ),
                   const SizedBox(height: 10),

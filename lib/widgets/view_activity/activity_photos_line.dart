@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class ActivityPhotosLine extends StatelessWidget {
-  const ActivityPhotosLine({Key? key}) : super(key: key);
+  const ActivityPhotosLine({super.key});
 
   @override
   Widget build(BuildContext context) {

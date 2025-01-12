@@ -10,13 +10,13 @@ class ActivityFeed extends StatelessWidget {
   final String? locationFilter; // Filter by location
 
   const ActivityFeed({
-    Key? key,
+    super.key,
     required this.currentUserId,
     this.showFriendsOnly = false,
     this.categoryFilter,
     this.maxParticipantsFilter,
     this.locationFilter,
-  }) : super(key: key);
+  });
 
   Stream<QuerySnapshot> fetchFilteredActivities() async* {
     Query query = FirebaseFirestore.instance.collection('activities');
@@ -36,12 +36,12 @@ class ActivityFeed extends StatelessWidget {
             query = query.where('createdBy', whereIn: friends);
           } else {
             print('No friends to filter.');
-            yield* Stream.empty();
+            yield* const Stream.empty();
             return;
           }
         } else {
           print('User document not found or friends list is null.');
-          yield* Stream.empty();
+          yield* const Stream.empty();
           return;
         }
       } else {
@@ -72,7 +72,7 @@ class ActivityFeed extends StatelessWidget {
       yield* query.snapshots(); // Return Firestore real-time stream
     } catch (e) {
       print('Error in fetchFilteredActivities: $e');
-      yield* Stream.empty(); // Return empty stream in case of error
+      yield* const Stream.empty(); // Return empty stream in case of error
     }
   }
 
