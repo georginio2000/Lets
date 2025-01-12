@@ -75,7 +75,7 @@ class _LoginPageState extends State<LoginPage> {
                   Navigator.pop(context, 'same');
                 },
                 child: const Text(
-                  'last signed account',
+                  'Same',
                   style: TextStyle(color: Colors.black), // Text color
                 ),
               ),
