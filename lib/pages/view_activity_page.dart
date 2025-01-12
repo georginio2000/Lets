@@ -208,31 +208,49 @@ class _ViewActivityPageState extends State<ViewActivityPage> {
                     ),
                   const SizedBox(height: 30),
                   Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Row(
-                        children: [
-                          SvgPicture.asset(
-                            'assets/SMALL_MAP_ICON.svg', // Path to your SVG file
-                            height: 24, // Set the height
-                          ),                          Text(
-                            activityData?['location'] ?? "N/A",
-                            style: const TextStyle(fontSize: 20),
-                          ),
-                        ],
+                      Flexible(
+                        flex: 1,
+                        child: Row(
+                          children: [
+                            SvgPicture.asset(
+                              'assets/SMALL_MAP_ICON.svg', // Path to your SVG file
+                              height: 24, // Set the height
+                            ),
+                            const SizedBox(width: 4), // Add small spacing
+                            Flexible(
+                              child: Text(
+                                activityData?['location'] ?? "N/A",
+                                style: const TextStyle(fontSize: 20),
+                                overflow: TextOverflow.ellipsis, // Prevent overflow
+                                maxLines: 1, // Constrain to a single line
+                              ),
+                            ),
+                          ],
+                        ),
                       ),
-                      const SizedBox(width: 50),
-                      Row(
-                        children: [
-                          const Icon(Icons.access_time, size: 24),
-                          Text(
-                            activityData?['dateTime'] ?? "N/A",
-                            style: const TextStyle(fontSize: 20),
-                          ),
-                        ],
+                      const SizedBox(width: 16),
+                      Flexible(
+                        flex: 1,
+                        child: Row(
+                          children: [
+                            const Icon(Icons.access_time, size: 24),
+                            const SizedBox(width: 4), // Add small spacing
+                            Flexible(
+                              child: Text(
+                                activityData?['dateTime'] ?? "N/A",
+                                style: const TextStyle(fontSize: 20),
+                                overflow: TextOverflow.ellipsis, // Prevent overflow
+                                maxLines: 1, // Constrain to a single line
+                              ),
+                            ),
+                          ],
+                        ),
                       ),
                     ],
                   ),
+
                   const SizedBox(height: 40),
                   Center(
                     child: Text(
